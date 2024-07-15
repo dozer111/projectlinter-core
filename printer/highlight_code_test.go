@@ -1,8 +1,8 @@
 package printer_test
 
 import (
-	"github.com/dozer111/projectlinter/printer"
-	"github.com/dozer111/projectlinter/util/painter"
+	"github.com/dozer111/projectlinter-core/printer"
+	"github.com/dozer111/projectlinter-core/util/painter"
 	"github.com/stretchr/testify/assert"
 	"strings"
 	"testing"

@@ -1,7 +1,7 @@
 package printer
 
 import (
-	"github.com/dozer111/projectlinter/util/painter"
+	"github.com/dozer111/projectlinter-core/util/painter"
 )
 
 // HighlightCodePrinter - The main idea is that we have an output ([]string), for example - a YAML list.
