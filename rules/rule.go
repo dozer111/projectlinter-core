@@ -1,4 +1,4 @@
-package projectlinter
+package rules
 
 // Rule - the main thing in all the project. It`s the one that actually checks for something.
 //
