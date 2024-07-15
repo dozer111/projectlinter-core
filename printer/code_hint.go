@@ -1,7 +1,7 @@
 package printer
 
 import (
-	"github.com/dozer111/projectlinter/util/painter"
+	"github.com/dozer111/projectlinter-core/util/painter"
 )
 
 // CodeHintPrinter - Hint for the code.
