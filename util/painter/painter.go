@@ -9,5 +9,29 @@ type Painter interface {
 	White(text string) string
 	Yellow(text string) string
 
-	Warning(ruleName string) string
+	Warning(text string) string
+}
+
+type PainterState string
+
+const (
+	BashCLI PainterState = "bash"
+	Fake    PainterState = "fake"
+)
+
+var CurrentPainterState PainterState = BashCLI
+
+// NewPainter - factory method
+// Create a painter according to your needs
+//
+// The idea is: you can change the painter realization from outside by changing the CurrentPainterState
+func NewPainter() Painter {
+	switch CurrentPainterState {
+	case BashCLI:
+		return &bashPainter{}
+	case Fake:
+		return &fakePainter{}
+	default:
+		return &bashPainter{}
+	}
 }

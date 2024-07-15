@@ -2,14 +2,11 @@ package painter
 
 import "fmt"
 
+// bashPainter - colors in bash CLI
 type bashPainter struct {
 }
 
 var _ Painter = (*bashPainter)(nil)
-
-func NewPainter() Painter {
-	return &bashPainter{}
-}
 
 func (p bashPainter) Red(text string) string {
 	return p.paint("\033[31m", text)
@@ -31,8 +28,8 @@ func (p bashPainter) Yellow(text string) string {
 	return p.paint("\033[33m", text)
 }
 
-func (p bashPainter) Warning(ruleName string) string {
-	return p.Yellow(fmt.Sprintf("⚠ %s", ruleName))
+func (p bashPainter) Warning(text string) string {
+	return p.Yellow(fmt.Sprintf("⚠ %s", text))
 }
 
 func (p bashPainter) paint(color, text string) string {
