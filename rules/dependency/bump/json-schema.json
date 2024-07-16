@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "Projectlinter bump library",
+  "title": "Bump library schema",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^(\\d+)|(\\d+\\.\\d+)|(\\d+\\.\\d+\\.\\d+)$",
+      "description": "library constraint",
+      "examples": [
+        "3",
+        "3.4",
+        "3.2.125"
+      ]
+    },
+    "description": {
+      "type": "array",
+      "description": "An explanation, why do you need to update the library to a certain version",
+      "items": {
+        "type": "string"
+      }
+    },
+    "responsiblePersons": {
+      "type": "array",
+      "description": "The people 'in context'(for example, the developer and his TL), who can be asked/consulted",
+      "items": {
+        "type": "string"
+      }
+    },
+    "examples": {
+      "type": "array",
+      "description": "Examples where similar thing was done. It may be a link on PR or a lot of commit-links",
+      "items": {
+        "type": "object",
+        "properties": {
+          "projectName": {
+            "type": "string",
+            "description": "Project title"
+          },
+          "committee": {
+            "type": "string",
+            "description": "The nickname of the person who committed (so that you can choose the person you trust the most from the list of people)"
+          },
+          "links": {
+            "type": "array",
+            "description": "Link on commit/PR",
+            "items": {
+              "type": "string",
+              "examples": [
+                "https://your_git.com/some-sv/pull-requests/67/diff",
+                "https://your_git.com/another-project/commits/17c123bd00bc4ffc0cd6ced75dc987c20568ee4b"
+              ]
+            }
+          }
+        },
+        "required": [
+          "projectName",
+          "committee",
+          "links"
+        ]
+      }
+    }
+  },
+  "required": [
+    "name",
+    "version"
+  ]
+}

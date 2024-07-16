@@ -1,0 +1,13 @@
+name: my-private-git/logger
+version: "3.29.2"
+responsiblePersons:
+  - dondo
+examples:
+  - projectName: some-service
+    committee: dondo
+    links:
+      - https://your_git.com/some-service/commits/497e11b2a6dda145a11e8384d48bc6fe97aa2de2
+  - projectName: service2
+    committee: olof
+    links:
+      - https://your_git.com/some-service2/pull-requests/67/commits/0f2ce352e31c09aa79f13037c839b56ba701ba15
