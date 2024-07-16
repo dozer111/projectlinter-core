@@ -1,0 +1,16 @@
+name: symfony/framework-bundle
+version: "6.3"
+description:
+  - "Finally we can fetch body from POST request"
+  - "You need to check files with Symfony\\Component\\HttpFoundation\\Request"
+  - "Change `$request->request->...` on `$request->getPayload()->...`"
+  - "Docs: https://symfony.com/blog/new-in-symfony-6-3-request-payload"
+responsiblePersons:
+  - dozer111
+  - neo
+  - morpheus
+examples:
+  - projectName: auth-sv
+    committee: dozer111
+  - projectName: payment-sv
+    committee: neo

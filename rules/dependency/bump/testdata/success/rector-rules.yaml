@@ -1,0 +1,9 @@
+name: my-private-git/rector-rules
+version: "2.0"
+responsiblePersons:
+  - dozer111
+examples:
+  - projectName: some-service
+    committee: dozer111
+    links:
+      - https://your_git.com/service1/commits/228b2749cdec314558f04284b836b9d609f89e9f#rector.php
