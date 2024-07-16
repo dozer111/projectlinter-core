@@ -7,6 +7,7 @@ require (
 	github.com/Masterminds/semver/v3 v3.2.1
 	github.com/dozer111/projectlinter-core v0.0.0-20240716113506-3ca3ff2c7b4d
 	github.com/google/go-cmp v0.6.0
+	github.com/huandu/xstrings v1.5.0
 	github.com/stretchr/testify v1.9.0
 )
 
