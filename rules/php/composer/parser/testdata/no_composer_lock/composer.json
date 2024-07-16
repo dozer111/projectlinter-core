@@ -1,0 +1,59 @@
+{
+    "name": "private-git/some-project",
+    "license": "proprietary",
+    "type": "project",
+    "require": {
+        "php": "^8.2",
+        "ext-openssl": "*",
+        "doctrine/doctrine-migrations-bundle": "^3.2.2",
+        "qandidate/symfony-json-request-transformer": "^2.2.0",
+        "symfony/validator": "^6.2.10",
+        "symfony/yaml": "^6.2.10"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.16.0",
+        "symfony/browser-kit": "^6.2.7",
+        "symfony/phpunit-bridge": "^6.2.10"
+    },
+    "conflict": {
+        "symfony/symfony": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Company\\ProjectName\\": "src/Service/",
+            "Infrastructure\\": "src/Infrastructure/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Company\\ProjectName\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/flex": true,
+            "php-http/discovery": true
+        },
+        "platform": {
+            "php": "8.2"
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": false,
+            "require": "6.2.*"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "@auto-scripts"
+        ],
+        "post-update-cmd": [
+            "@auto-scripts"
+        ],
+        "auto-scripts": {
+            "cache:clear": "symfony-cmd"
+        }
+    }
+}
