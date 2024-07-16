@@ -1,7 +1,7 @@
 package painter_test
 
 import (
-	"github.com/dozer111/projectlinter/util/painter"
+	"github.com/dozer111/projectlinter-core/util/painter"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

@@ -1,0 +1,17 @@
+changeTo: symfony/mailer
+description:
+  - "See wikiPage: http://...."
+responsiblePersons:
+  - dozer111
+  - morbus
+  - ondor
+examples:
+  - projectName: auth-sv
+    committee: dozer111
+    links:
+      - https://your_git.com/auth-sv/pull-requests/91/overview
+  - projectName: yggdrasil-integration-sv
+    committee: morbus
+    links:
+      - https://your_git.com/payment-sv/commits/69a1bb1f09cbe5796f95edf7066be46effcd5ffe
+      - https://your_git.com/payment-sv/commits/69a1bb1f09cbe5796f95edf7066bqqq12fcd5ffe

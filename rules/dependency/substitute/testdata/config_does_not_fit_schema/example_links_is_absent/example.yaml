@@ -1,0 +1,13 @@
+name: symfony/swiftmailer-bundle
+changeTo: symfony/mailer
+description:
+  - "See wikiPage: http://...."
+responsiblePersons:
+  - dozer111
+  - morbus
+  - ondor
+examples:
+  - projectName: auth-sv
+    committee: dozer111
+  - projectName: yggdrasil-integration-sv
+    committee: morbus
