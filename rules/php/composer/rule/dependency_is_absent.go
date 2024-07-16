@@ -55,8 +55,8 @@ func (r *DependencyIsAbsentRule) IsPassed() bool {
 
 func (r *DependencyIsAbsentRule) FailedMessage() []string {
 	message := printer.NewCodeHintPrinter(
-		[]string{fmt.Sprintf(`"%s": "%s",`, r.dependencyName, r.dependency.Constraint())},
 		nil,
+		[]string{fmt.Sprintf(`"%s": "%s",`, r.dependencyName, r.dependency.Constraint())},
 		nil,
 		nil,
 	).Print()
