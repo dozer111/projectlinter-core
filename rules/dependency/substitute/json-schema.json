@@ -1,25 +1,18 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "Projectlinter bump library",
-  "title": "Bump library schema",
+  "$id": "Projectlinter substitute library",
+  "title": "Substitute library schema",
   "type": "object",
   "properties": {
     "name": {
       "type": "string"
     },
-    "version": {
-      "type": "string",
-      "pattern": "^(\\d+)|(\\d+\\.\\d+)|(\\d+\\.\\d+\\.\\d+)$",
-      "description": "library constraint",
-      "examples": [
-        "3",
-        "3.4",
-        "3.2.125"
-      ]
+    "changeTo": {
+      "type": "string"
     },
     "description": {
       "type": "array",
-      "description": "An explanation, why do you need to update the library to a certain version",
+      "description": "An explanation, why do you need to substitute the library",
       "items": {
         "type": "string"
       }
@@ -51,8 +44,8 @@
             "items": {
               "type": "string",
               "examples": [
-                "https://your_git.com/some-sv/pull-requests/67/diff",
-                "https://your_git.com/another-project/commits/17c123bd00bc4ffc0cd6ced75dc987c20568ee4b"
+                "https://your_git.com/projectName/pull-requests/67/diff",
+                "https://your_git.com/projectName/commits/17c123bd00bc4ffc0cd6ced75dc987c20568ee4b"
               ]
             }
           }
@@ -67,6 +60,6 @@
   },
   "required": [
     "name",
-    "version"
+    "changeTo"
   ]
 }
