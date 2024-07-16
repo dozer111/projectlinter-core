@@ -1,3 +1,3 @@
-module git.syneforge.com/gin/00-go-base-tpl-client-lb
+module custom-git-repo/some-project
 
 go 1.21
