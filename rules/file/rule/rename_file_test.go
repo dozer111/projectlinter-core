@@ -1,7 +1,7 @@
 package file_test
 
 import (
-	"github.com/dozer111/projectlinter-core/rules/file"
+	"github.com/dozer111/projectlinter-core/rules/file/rule"
 	utilTest "github.com/dozer111/projectlinter-core/util/test"
 	"testing"
 
