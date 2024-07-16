@@ -2,19 +2,19 @@ package utilTest
 
 import (
 	"fmt"
+	"os"
 	"path/filepath"
-	"runtime"
-	"strings"
 )
 
 // PathInProjectLinter is the full path to the folder/file inside the projectlinter
 //
 // This method is used exclusively in tests so that you can easily get to a certain folder/file without additional complications
 func PathInProjectLinter(relativePath string) string {
-	return fmt.Sprintf("%s/%s", pathToProjectlinter(), relativePath)
-}
+	currentDir, err := os.Getwd()
+	if err != nil {
+		fmt.Println("cannot find caller dir:" + err.Error())
+	}
 
-func pathToProjectlinter() string {
-	_, b, _, _ := runtime.Caller(0)
-	return filepath.Dir(strings.TrimSuffix(b, "util/test/path_in_projectlinter.go"))
+	newPath := filepath.Join(currentDir, relativePath)
+	return newPath
 }
