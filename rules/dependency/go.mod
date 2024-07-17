@@ -5,7 +5,7 @@ go 1.22.5
 require (
 	github.com/1set/gut v0.0.0-20201117175203-a82363231997
 	github.com/Masterminds/semver/v3 v3.2.1
-	github.com/dozer111/projectlinter-core v0.0.0-20240716145112-8c1ea146d19c
+	github.com/dozer111/projectlinter-core v0.0.0-20240717112052-7d2347359491
 	github.com/dozer111/projectlinter-core/rules/golang/gomod v0.0.0-20240716145112-8c1ea146d19c
 	github.com/dozer111/projectlinter-core/rules/php/composer v0.0.0-20240716145112-8c1ea146d19c
 	github.com/stretchr/testify v1.9.0

@@ -10,6 +10,12 @@ github.com/dozer111/projectlinter v0.0.0-20240715153531-6d7adc07fe05 h1:ITwM6m12
 github.com/dozer111/projectlinter v0.0.0-20240715153531-6d7adc07fe05/go.mod h1:IFLN7bd3n/DSNAqj2dqxsMIMRVwXYRaw+s8cpplx404=
 github.com/dozer111/projectlinter-core v0.0.0-20240716145112-8c1ea146d19c h1:a1CouYdphf0+YIXNNtEmX/LRnPHEfDgxa4ABiStZWmg=
 github.com/dozer111/projectlinter-core v0.0.0-20240716145112-8c1ea146d19c/go.mod h1:hMJhVfQJyuG83y4wY3rFu/u46oz8ufMuOEeer7wcy+Y=
+github.com/dozer111/projectlinter-core v0.0.0-20240717104707-98c503f8ae25 h1:YdWEoCITLbBdKa62QS84FfcH1HAjYpIITyPIaECy1/A=
+github.com/dozer111/projectlinter-core v0.0.0-20240717104707-98c503f8ae25/go.mod h1:hMJhVfQJyuG83y4wY3rFu/u46oz8ufMuOEeer7wcy+Y=
+github.com/dozer111/projectlinter-core v0.0.0-20240717110639-20da37a0a47e h1:4uss8aHaVa1lfvy5H/frUE9RXPYzOdOXVmb7ffvrYMs=
+github.com/dozer111/projectlinter-core v0.0.0-20240717110639-20da37a0a47e/go.mod h1:hMJhVfQJyuG83y4wY3rFu/u46oz8ufMuOEeer7wcy+Y=
+github.com/dozer111/projectlinter-core v0.0.0-20240717112052-7d2347359491 h1:alHFvQVVeyji2mcUlNVYZo2jZILnV0FV9FCyaaOU/YM=
+github.com/dozer111/projectlinter-core v0.0.0-20240717112052-7d2347359491/go.mod h1:hMJhVfQJyuG83y4wY3rFu/u46oz8ufMuOEeer7wcy+Y=
 github.com/dozer111/projectlinter-core/rules/golang/gomod v0.0.0-20240716145112-8c1ea146d19c h1:KrbCTRRosMNhvvQrUcSlJ4ZfwZpMFPVpUbFx081rBpg=
 github.com/dozer111/projectlinter-core/rules/golang/gomod v0.0.0-20240716145112-8c1ea146d19c/go.mod h1:qOoXn50TDfXZkTobco4b3aX8FlugO/zbMoKhmAsjeRQ=
 github.com/dozer111/projectlinter-core/rules/php/composer v0.0.0-20240716145112-8c1ea146d19c h1:rgsArnLt9lNJExJ0ddg0TcTs9fxEim1n2e14dzH+iQE=
