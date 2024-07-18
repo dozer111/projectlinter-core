@@ -75,7 +75,7 @@ func (p *Parser) assertConfigSatisfiesToJsonSchema(data []byte, filePath string)
 		return errors.New(fmt.Sprintf("cannot check does the file %s fits json-schema: %v", filePath, err))
 	}
 	if result.Valid() == false {
-		return fmt.Errorf("%w: %v", ConfigDoesNotFitSchema, result.Errors())
+		return fmt.Errorf("%w: %s: %v", ConfigDoesNotFitSchema, filePath, result.Errors())
 	}
 
 	return nil
