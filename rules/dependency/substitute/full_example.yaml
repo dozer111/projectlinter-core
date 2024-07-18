@@ -1,18 +1,23 @@
-name: symfony/swiftmailer-bundle
-changeTo: symfony/mailer
+name: private-custom-test-library
+changeTo: github.com/testcontainers/testcontainers-go
+task: https://jira.syneforge.com/browse/GINBE-1234
 description:
-  - "See wikiPage: http://...."
+  - "On the tech meeting 2024-05-21 we agreed to stop using our custom test library"
+  - "And instead start to work with github.com/testcontainers/testcontainers-go"
+  - "It do the same things, so no problem at all"
+  - "The switch is easy(see examples)"
+  - ""
+  - "Also, we create task for drop the old library: https://your_jira.com/task-1234"
 responsiblePersons:
   - dozer111
-  - morbus
-  - ondor
+  - catLovers
+  - dondo
 examples:
   - projectName: auth-sv
     committee: dozer111
     links:
-      - https://your_git.com/auth-sv/pull-requests/91/overview
+      - https://your_git.com/projects/repos/auth-sv/pull-requests/91/overview
   - projectName: yggdrasil-integration-sv
-    committee: morbus
+    committee: catLovers
     links:
-      - https://your_git.com/payment-sv/commits/69a1bb1f09cbe5796f95edf7066be46effcd5ffe
-      - https://your_git.com/payment-sv/commits/69a1bb1f09cbe5796f95edf7066bqqq12fcd5ffe
+      - https://your_git.com/projects/repos/payment-sv/commits/69a1bb1f09cbe5796f95edf7066be46effcd5ffe

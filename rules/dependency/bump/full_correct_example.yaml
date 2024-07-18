@@ -5,8 +5,8 @@ responsiblePersons:
   - dondo
   - puppey
 description:
-  - The internal code was splitted to "system" and "base" limits
-  - You need to do little update after. See examples
+  - "The internal code was splitted to \"system\" and \"base\" limits"
+  - "You need to do little update after. See examples"
 examples:
   - projectName: auth-sv
     committee: dozer111

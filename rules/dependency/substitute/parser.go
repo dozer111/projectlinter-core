@@ -78,7 +78,7 @@ func (p *Parser) assertConfigSatisfiesToJsonSchema(data []byte, filePath string)
 		return fmt.Errorf("cannot ensure that file %s fits substitute json-schema: %w", filePath, err)
 	}
 	if result.Valid() == false {
-		return fmt.Errorf("%w: %v", BumpConfigDoesNotFitSchema, result.Errors())
+		return fmt.Errorf("%w: %s: %v", BumpConfigDoesNotFitSchema, filePath, result.Errors())
 	}
 
 	return nil
