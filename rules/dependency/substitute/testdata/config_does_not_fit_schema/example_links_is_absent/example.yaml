@@ -9,5 +9,5 @@ responsiblePersons:
 examples:
   - projectName: auth-sv
     committee: dozer111
-  - projectName: yggdrasil-integration-sv
+  - projectName: payment-sv
     committee: morbus
