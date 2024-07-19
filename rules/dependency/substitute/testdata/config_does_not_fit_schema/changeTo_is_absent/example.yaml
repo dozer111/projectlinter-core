@@ -10,7 +10,7 @@ examples:
     committee: dozer111
     links:
       - https://your_git.com/auth-sv/pull-requests/91/overview
-  - projectName: yggdrasil-integration-sv
+  - projectName: payment-sv
     committee: morbus
     links:
       - https://your_git.com/payment-sv/commits/69a1bb1f09cbe5796f95edf7066be46effcd5ffe

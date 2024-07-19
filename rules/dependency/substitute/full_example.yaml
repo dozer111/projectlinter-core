@@ -1,6 +1,5 @@
 name: private-custom-test-library
 changeTo: github.com/testcontainers/testcontainers-go
-task: https://jira.syneforge.com/browse/GINBE-1234
 description:
   - "On the tech meeting 2024-05-21 we agreed to stop using our custom test library"
   - "And instead start to work with github.com/testcontainers/testcontainers-go"
@@ -17,7 +16,7 @@ examples:
     committee: dozer111
     links:
       - https://your_git.com/projects/repos/auth-sv/pull-requests/91/overview
-  - projectName: yggdrasil-integration-sv
+  - projectName: payment-sv
     committee: catLovers
     links:
       - https://your_git.com/projects/repos/payment-sv/commits/69a1bb1f09cbe5796f95edf7066be46effcd5ffe
