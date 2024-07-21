@@ -6,7 +6,7 @@ import (
 	"github.com/Masterminds/semver/v3"
 )
 
-// bumpLibraryRule Планове безболісне підняття бібліотек.
+// bumpLibraryRule Planned painless upgrading of libraries.
 type bumpLibraryRule struct {
 	configs      []Library
 	dependencies []Dependency

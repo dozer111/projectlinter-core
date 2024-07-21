@@ -5,12 +5,6 @@ import (
 	"path/filepath"
 )
 
-// PathProvider - структура, яку слід використовувати для того щоб отримати шлях до файла/папки в проекті
-// з якого власне був запущений projectlinter
-//
-// Наприклад, в мене є проект auth-sv, в ньому я запускаю projectlinter
-// pathProvider.PathInCaller(".helm/templates") поверне мені абсолютний шлях до папки templates в проекті auth-sv
-// Наприклад, це буде /var/www/auth-sv/.helm/.templates
 // PathProvider - a structure that should be used to get the path to a file/folder in the project
 // from which projectlinter was actually launched
 //
