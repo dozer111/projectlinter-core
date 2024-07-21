@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// перевірка що значення "простого"(значення якого - примітивний тип даних) блоку вірне
+// SectionHasCorrectValueRule check the simple section(the value is primitive) value is correct
 type SectionHasCorrectValueRule[T comparable] struct {
 	value    sectionValue[T]
 	section  []string

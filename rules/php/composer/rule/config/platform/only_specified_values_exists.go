@@ -5,7 +5,7 @@ import (
 	"github.com/dozer111/projectlinter-core/rules"
 )
 
-// OnlySpecifiedPlatformExistsRule Вказує що "config.platform" має містити ВИКЛЮЧНО вказані платформи
+// OnlySpecifiedPlatformExistsRule check that "config.platform" contains ONLY specified platforms
 type OnlySpecifiedPlatformExistsRule struct {
 	expectedValues map[string]string
 	value          map[string]string

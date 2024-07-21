@@ -3,11 +3,6 @@ package rules
 import utilSet "github.com/dozer111/projectlinter-core/util/set"
 
 type (
-	// Set Ряд правил згрупований під одним іменем(composer,werf,phpunit, ...)
-	//
-	// Правила повертаються саме як RuleTree, тому що на відміну від багатьох інших парсерів(phpCsFixer, rector, golangci)
-	// цей не перевіряє окремі ділянки кода. Він перевіряє структуру(конфігурацій/директорій) загалом,
-	// тому нормально що є правила більш глобальні, а є більш точкові.
 	// Set A list of rules grouped by some thing(composer,phpunit, go.mod, ...)
 	//
 	// Rules are returned exactly as a RuleTree, because unlike many other linters(phpCsFixer, rector, golangci)
@@ -24,7 +19,7 @@ type (
 	// The realization of set make it possible to firstly check "Makefile is latest", and only if its true - do the second
 	// check "<fileWithNewName> exists in .helm directory"
 	Set interface {
-		// ID to ignore via rules + це значення завжди буде коротеньке, тому воно слугує ще й іменем
+		// ID to ignore via rules + this name would always short, so it's also a title
 		ID() string
 		// Init actually prepares everything necessary before Run(parse the corresponding configuration files, ...)
 		Init() []error
@@ -44,18 +39,6 @@ type (
 		Sets() ([]Set, error)
 	}
 
-	// RuleTree - паттерн composite
-	//
-	// Структура для зберігання і роботи з правилами
-	// Завдяки своїй гнучкості дозволяє створювати не просто прості лінійні набори правил(як наприклад в golangci,phpcsfixer,rector, ...)
-	//
-	// А доволі складні структури що мають кілька рівнів вкладеності
-	//
-	// Чому саме так - тому що щоб сконфігурувати projectlinter вам треба писати код(а не просто зробити масив чи yaml файл)
-	// Тому, оскільки ми вже все одно маємо докладати зусилля для конфігурації ми маємо отримувати певний виграш
-	//
-	// Виграш вкладеності заключається в тому що ви виставляєте знання про те як налаштувати свій проект більш правильно
-	// а не просто хаотичні зауваження в стилі "зміни те на це"
 	// RuleTree - composite pattern
 	//
 	// Structure for storing and working with rules
@@ -101,8 +84,6 @@ type (
 		//
 		//
 		Conditions []func() bool
-		// Optional вказує на те чи є правило опційним.
-		// Якщо правило опційне - воно та його Children не попадуть в Resolve як "непройдені" в разі невдачі
 		// Optional indicates whether the rule is optional.
 		// If the rule is optional and its fail - projectlinter would pretend that this rule was newer in list
 		//
