@@ -3,7 +3,6 @@ module github.com/dozer111/projectlinter-core
 go 1.22
 
 require (
-	github.com/dozer111/projectlinter v0.0.0-20240715153531-6d7adc07fe05
 	github.com/nsf/jsondiff v0.0.0-20230430225905-43f6cf3098c1
 	github.com/stretchr/testify v1.9.0
 )
