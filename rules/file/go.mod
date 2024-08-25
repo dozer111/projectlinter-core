@@ -4,7 +4,7 @@ go 1.22
 
 require (
 	github.com/1set/gut v0.0.0-20201117175203-a82363231997
-	github.com/dozer111/projectlinter-core v0.0.0-20240716082325-644e7a760c72
+	github.com/dozer111/projectlinter-core v1.0.0
 	github.com/huandu/xstrings v1.5.0
 	github.com/stretchr/testify v1.9.0
 )

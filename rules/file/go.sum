@@ -5,6 +5,8 @@ github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc h1:U9qPSI2PIWSS1
 github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/dozer111/projectlinter-core v0.0.0-20240716082325-644e7a760c72 h1:uDbbSXvYd9vsZ9G/nvdXeSXN0fKt3kZO/tvElus0Q+8=
 github.com/dozer111/projectlinter-core v0.0.0-20240716082325-644e7a760c72/go.mod h1:Y63bil++0Jhk4QRp6EisMrjHsEWJFFTpN1UGrpSMVjk=
+github.com/dozer111/projectlinter-core v1.0.0 h1:oY3wL+3SqsES68t7Cds3TXOyKsuAFKTMA81IBogdo9Q=
+github.com/dozer111/projectlinter-core v1.0.0/go.mod h1:hMJhVfQJyuG83y4wY3rFu/u46oz8ufMuOEeer7wcy+Y=
 github.com/huandu/xstrings v1.5.0 h1:2ag3IFq9ZDANvthTwTiqSSZLjDc+BedvHPAp5tJy2TI=
 github.com/huandu/xstrings v1.5.0/go.mod h1:y5/lhBue+AyNmUVz9RLU9xbLR0o4KIIExikq4ovT0aE=
 github.com/kr/pretty v0.2.1/go.mod h1:ipq/a2n7PKx3OHsz4KJII5eveXtPO4qwEXGdVfWzfnI=

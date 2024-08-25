@@ -1,11 +1,11 @@
 module github.com/dozer111/projectlinter-core/rules/php/composer
 
-go 1.22.5
+go 1.22
 
 require (
 	github.com/1set/gut v0.0.0-20201117175203-a82363231997
 	github.com/Masterminds/semver/v3 v3.2.1
-	github.com/dozer111/projectlinter-core v0.0.0-20240716135619-a4288ae299a7
+	github.com/dozer111/projectlinter-core v1.0.0
 	github.com/google/go-cmp v0.6.0
 	github.com/huandu/xstrings v1.5.0
 	github.com/stretchr/testify v1.9.0
