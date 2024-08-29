@@ -2,6 +2,7 @@ package rule
 
 import (
 	"fmt"
+	"slices"
 	"strings"
 
 	"github.com/dozer111/projectlinter-core/printer"
@@ -18,13 +19,13 @@ type SectionHasCorrectValueRule[T comparable] struct {
 var _ rules.Rule = (*SectionHasCorrectValueRule[string])(nil)
 
 type sectionValue[T comparable] struct {
-	expected T
+	expected []T
 	actual   T
 }
 
 func NewSectionHasCorrectValueRule[T comparable](
 	section string,
-	expectedValue T,
+	expectedValue []T,
 	actualValue T,
 ) *SectionHasCorrectValueRule[T] {
 	return &SectionHasCorrectValueRule[T]{
@@ -45,7 +46,17 @@ func (r *SectionHasCorrectValueRule[T]) Title() string {
 }
 
 func (r *SectionHasCorrectValueRule[T]) Validate() {
-	r.isPassed = r.value.actual == r.value.expected
+	if len(r.value.expected) == 0 {
+		r.isPassed = false
+		return
+	}
+
+	for _, v := range r.value.expected {
+		if r.value.actual == v {
+			r.isPassed = true
+			break
+		}
+	}
 }
 
 func (r *SectionHasCorrectValueRule[T]) IsPassed() bool {
@@ -53,19 +64,42 @@ func (r *SectionHasCorrectValueRule[T]) IsPassed() bool {
 }
 
 func (r *SectionHasCorrectValueRule[T]) FailedMessage() []string {
+	if len(r.value.expected) == 0 {
+		return []string{
+			"rule must contain at least one expected value",
+		}
+	}
+
+	resultMessage := make([]string, 0, 4)
+	if len(r.value.expected) > 1 {
+		resultMessage = append(
+			resultMessage,
+			"There is a number of correct values for this section.",
+			"Choose the most correct one",
+		)
+	}
+
 	actual := r.value.actual
 
 	if len(r.section) == 1 {
-		return printer.NewCodeHintPrinter(
+		newCode := make([]string, 0, len(r.value.expected))
+		for _, expected := range r.value.expected {
+			newCode = append(newCode, r.failedMessageNewCode(r.section[0], expected))
+		}
+
+		message := printer.NewCodeHintPrinter(
 			nil,
 			[]string{r.failedMessageNewCode(r.section[0], actual)},
-			[]string{r.failedMessageNewCode(r.section[0], r.value.expected)},
+			newCode,
 			nil,
 		).Print()
+
+		return slices.Concat(resultMessage, message)
 	}
 
 	var codeBefore []string
-	var wrongCode, newCode string
+	var newCode []string
+	var wrongCode string
 	for i, s := range r.section {
 		tab := strings.Repeat("\t", i)
 		if i != len(r.section)-1 {
@@ -73,16 +107,21 @@ func (r *SectionHasCorrectValueRule[T]) FailedMessage() []string {
 		} else {
 			codeBefore = append(codeBefore, fmt.Sprintf(`%s"..": ...,`, tab))
 			wrongCode = fmt.Sprintf(`%s%s`, tab, r.failedMessageNewCode(s, actual))
-			newCode = fmt.Sprintf(`%s%s`, tab, r.failedMessageNewCode(s, r.value.expected))
+			for _, expected := range r.value.expected {
+				newCode = append(newCode, r.failedMessageNewCode(s, expected))
+			}
 		}
 	}
 
-	return printer.NewCodeHintPrinter(
-		codeBefore,
-		[]string{wrongCode},
-		[]string{newCode},
-		nil,
-	).Print()
+	return slices.Concat(
+		resultMessage,
+		printer.NewCodeHintPrinter(
+			codeBefore,
+			[]string{wrongCode},
+			newCode,
+			nil,
+		).Print(),
+	)
 }
 
 func (r *SectionHasCorrectValueRule[T]) failedMessageNewCode(section string, value any) string {
