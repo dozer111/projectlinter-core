@@ -25,8 +25,8 @@ type sectionValue[T comparable] struct {
 
 func NewSectionHasCorrectValueRule[T comparable](
 	section string,
-	expectedValue []T,
 	actualValue T,
+	expectedValue ...T,
 ) *SectionHasCorrectValueRule[T] {
 	return &SectionHasCorrectValueRule[T]{
 		value: sectionValue[T]{
