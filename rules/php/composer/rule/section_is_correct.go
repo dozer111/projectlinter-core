@@ -2,9 +2,10 @@ package rule
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/dozer111/projectlinter-core/printer"
 	"github.com/dozer111/projectlinter-core/rules"
-	"strings"
 )
 
 // SectionHasCorrectValueRule check the simple section(the value is primitive) value is correct
@@ -19,11 +20,6 @@ var _ rules.Rule = (*SectionHasCorrectValueRule[string])(nil)
 type sectionValue[T comparable] struct {
 	expected T
 	actual   T
-}
-
-func (v sectionValue[T]) defaultActual() T {
-	var defaultValue T
-	return defaultValue
 }
 
 func NewSectionHasCorrectValueRule[T comparable](
