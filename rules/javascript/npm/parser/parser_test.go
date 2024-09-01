@@ -1,4 +1,4 @@
-package javascriptNPMParser_test
+package parser_test
 
 import (
 	"errors"
@@ -34,7 +34,7 @@ func TestParseSuccess(t *testing.T) {
 		},
 	}
 
-	p := javascriptNPMParser.New(
+	p := javascriptNPMParser.NewParser(
 		utilTest.PathInProjectLinter("testdata/success"),
 	)
 	actualPackageJSON, actualPackageLock, err := p.Parse()
@@ -49,7 +49,7 @@ func TestParseSuccess(t *testing.T) {
 }
 
 func TestParserReturnErrorWhilePackageJsonIsAbsent(t *testing.T) {
-	p := javascriptNPMParser.New(
+	p := javascriptNPMParser.NewParser(
 		utilTest.PathInProjectLinter("testdata/no_package_json"),
 	)
 	actualPackageJSON, actualPackageLock, err := p.Parse()
@@ -61,7 +61,7 @@ func TestParserReturnErrorWhilePackageJsonIsAbsent(t *testing.T) {
 }
 
 func TestParserReturnErrorWhilePackageLockIsAbsent(t *testing.T) {
-	p := javascriptNPMParser.New(
+	p := javascriptNPMParser.NewParser(
 		utilTest.PathInProjectLinter("testdata/no_package_lock_json"),
 	)
 	actualPackageJson, actualPackageLock, err := p.Parse()

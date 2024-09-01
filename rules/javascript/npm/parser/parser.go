@@ -1,4 +1,4 @@
-package javascriptNPMParser
+package parser
 
 import (
 	"encoding/json"
@@ -22,7 +22,7 @@ var (
 	PackageLockJSONNotFound = errors.New("package-lock.json not found")
 )
 
-func New(dirWithConfigs string) *Parser {
+func NewParser(dirWithConfigs string) *Parser {
 	return &Parser{
 		dirWithConfigs,
 	}
