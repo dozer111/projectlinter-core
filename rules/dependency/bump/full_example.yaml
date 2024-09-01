@@ -1,3 +1,4 @@
+# $schema: https://raw.githubusercontent.com/dozer111/projectlinter-core/master/rules/dependency/bump/json-schema.json
 name: some-private-git/limit-lb
 version: "5.0"
 responsiblePersons:
