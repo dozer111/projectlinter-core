@@ -16,6 +16,10 @@ github.com/dozer111/projectlinter-core/rules/javascript/npm v0.0.0-2024090114105
 github.com/dozer111/projectlinter-core/rules/javascript/npm v0.0.0-20240901141057-ec294ef429ba/go.mod h1:QUdBG+PuBGr0/g/dDqg+er2vT0j90/S043TrwCundh4=
 github.com/dozer111/projectlinter-core/rules/javascript/npm v0.0.0-20240901141313-ac192371e2d4 h1:OKHqKp4GyzrV4HbUFMTaxHywOaiVD29nhxxwMnuFfSs=
 github.com/dozer111/projectlinter-core/rules/javascript/npm v0.0.0-20240901141313-ac192371e2d4/go.mod h1:QUdBG+PuBGr0/g/dDqg+er2vT0j90/S043TrwCundh4=
+github.com/dozer111/projectlinter-core/rules/javascript/npm v0.0.0-20240901142919-aa79fff0a5c2 h1:D/nVJCGA3AYZBGVkrWBvuKPtoBBsLl3Qw3V1Ig2hwA4=
+github.com/dozer111/projectlinter-core/rules/javascript/npm v0.0.0-20240901142919-aa79fff0a5c2/go.mod h1:QUdBG+PuBGr0/g/dDqg+er2vT0j90/S043TrwCundh4=
+github.com/dozer111/projectlinter-core/rules/javascript/npm v1.0.0 h1:u4kCppkI9dsBHXLplaPvY6FHfKzAeYsIinsMJoECbVg=
+github.com/dozer111/projectlinter-core/rules/javascript/npm v1.0.0/go.mod h1:QUdBG+PuBGr0/g/dDqg+er2vT0j90/S043TrwCundh4=
 github.com/dozer111/projectlinter-core/rules/php/composer v1.0.0 h1:n9JhgrknyfjUO5sSd7wmt2puRUgFQQMYxdkpT+fC+74=
 github.com/dozer111/projectlinter-core/rules/php/composer v1.0.0/go.mod h1:C5z4uqmDTnbhdT4b8a4RN9K7Zaxs2ocsGecRzZ3KwTM=
 github.com/google/go-cmp v0.6.0 h1:ofyhxvXcZhMsU5ulbFiLKl/XBFqE1GSq7atu8tAmTRI=

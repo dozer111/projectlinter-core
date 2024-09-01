@@ -7,7 +7,7 @@ require (
 	github.com/Masterminds/semver/v3 v3.3.0
 	github.com/dozer111/projectlinter-core v1.0.0
 	github.com/dozer111/projectlinter-core/rules/golang/gomod v1.0.0
-	github.com/dozer111/projectlinter-core/rules/javascript/npm v0.0.0-20240901141313-ac192371e2d4
+	github.com/dozer111/projectlinter-core/rules/javascript/npm v1.0.0
 	github.com/dozer111/projectlinter-core/rules/php/composer v1.0.0
 	github.com/stretchr/testify v1.9.0
 	github.com/xeipuuv/gojsonschema v1.2.0
