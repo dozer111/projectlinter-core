@@ -1,9 +1,7 @@
 package package_json
 
-import "github.com/dozer111/projectlinter-core/rules/javascript/npm/config"
-
 type NPMDependencies struct {
-	dependencies map[string][]*config.NPMDependency
+	dependencies map[string]*NPMDependency
 }
 
 func NewNPMDependencies(len int) *NPMDependencies {
@@ -12,17 +10,13 @@ func NewNPMDependencies(len int) *NPMDependencies {
 	}
 
 	return &NPMDependencies{
-		dependencies: make(map[string][]*config.NPMDependency, len),
+		dependencies: make(map[string]*NPMDependency, len),
 	}
 }
 
-func (d *NPMDependencies) Add(dependencies ...*config.NPMDependency) {
+func (d *NPMDependencies) Add(dependencies ...*NPMDependency) {
 	for _, dependency := range dependencies {
-		if len(d.dependencies[dependency.Name()]) == 0 {
-			d.dependencies[dependency.Name()] = make([]*config.NPMDependency, 0, 2)
-		}
-
-		d.dependencies[dependency.Name()] = append(d.dependencies[dependency.Name()], dependency)
+		d.dependencies[dependency.Name()] = dependency
 	}
 }
 
@@ -32,7 +26,7 @@ func (d *NPMDependencies) Has(dependency string) bool {
 	return ok
 }
 
-func (d *NPMDependencies) All() map[string][]*config.NPMDependency {
+func (d *NPMDependencies) All() map[string]*NPMDependency {
 	return d.dependencies
 }
 
@@ -42,19 +36,15 @@ func (d *NPMDependencies) Count() int {
 
 func (d *NPMDependencies) Merge(d2 *NPMDependencies) *NPMDependencies {
 	newDependencies := &NPMDependencies{
-		make(map[string][]*config.NPMDependency, d.Count()+d2.Count()),
+		make(map[string]*NPMDependency, d.Count()+d2.Count()),
 	}
 
 	for _, mergeWith := range d.All() {
-		for _, concreteDependency := range mergeWith {
-			newDependencies.Add(concreteDependency)
-		}
+		newDependencies.Add(mergeWith)
 	}
 
 	for _, mergeWith := range d2.All() {
-		for _, concreteDependency := range mergeWith {
-			newDependencies.Add(concreteDependency)
-		}
+		newDependencies.Add(mergeWith)
 	}
 
 	return newDependencies

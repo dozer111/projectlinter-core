@@ -30,7 +30,7 @@ func NewNPMConfig(
 			libraryVersion, _ = semver.NewVersion(packageLockPackages.Get(library).Version)
 		}
 
-		dependencies.Add(NewNPMDependency(
+		dependencies.Add(package_json.NewNPMDependency(
 			library,
 			constraint,
 			libraryVersion,
@@ -44,7 +44,7 @@ func NewNPMConfig(
 			libraryVersion, _ = semver.NewVersion(packageLockPackages.Get(library).Version)
 		}
 
-		devDependencies.Add(NewNPMDependency(
+		devDependencies.Add(package_json.NewNPMDependency(
 			library,
 			constraint,
 			libraryVersion,
@@ -54,33 +54,4 @@ func NewNPMConfig(
 	return &Config{
 		dependencies.Merge(devDependencies),
 	}
-}
-
-type NPMDependency struct {
-	name       string
-	version    *semver.Version
-	versionRaw string
-}
-
-func NewNPMDependency(
-	name, versionRaw string,
-	version *semver.Version,
-) *NPMDependency {
-	return &NPMDependency{
-		name,
-		version,
-		versionRaw,
-	}
-}
-
-func (d NPMDependency) Name() string {
-	return d.name
-}
-
-func (d NPMDependency) Version() *semver.Version {
-	return d.version
-}
-
-func (d NPMDependency) VersionRaw() string {
-	return d.versionRaw
 }
