@@ -1,4 +1,4 @@
-package package_json
+package config
 
 import "github.com/Masterminds/semver/v3"
 

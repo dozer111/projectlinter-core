@@ -1,4 +1,4 @@
-package package_json
+package config
 
 type NPMDependencies struct {
 	dependencies map[string]*NPMDependency

@@ -10,7 +10,7 @@ import (
 )
 
 type Config struct {
-	Dependencies *package_json.NPMDependencies
+	Dependencies *NPMDependencies
 }
 
 func NewNPMConfig(
@@ -18,8 +18,8 @@ func NewNPMConfig(
 	pkgLock package_lock_json.RawPackageLockJSON,
 ) *Config {
 	dependenciesLen := len(pkg.Dependencies) + len(pkg.DevDependencies)
-	dependencies := package_json.NewNPMDependencies(dependenciesLen)
-	devDependencies := package_json.NewNPMDependencies(dependenciesLen)
+	dependencies := NewNPMDependencies(dependenciesLen)
+	devDependencies := NewNPMDependencies(dependenciesLen)
 
 	packageLockPackages := package_lock_json.NewNPMLockPackages(pkgLock.Packages)
 
@@ -30,7 +30,7 @@ func NewNPMConfig(
 			libraryVersion, _ = semver.NewVersion(packageLockPackages.Get(library).Version)
 		}
 
-		dependencies.Add(package_json.NewNPMDependency(
+		dependencies.Add(NewNPMDependency(
 			library,
 			constraint,
 			libraryVersion,
@@ -44,7 +44,7 @@ func NewNPMConfig(
 			libraryVersion, _ = semver.NewVersion(packageLockPackages.Get(library).Version)
 		}
 
-		devDependencies.Add(package_json.NewNPMDependency(
+		devDependencies.Add(NewNPMDependency(
 			library,
 			constraint,
 			libraryVersion,
