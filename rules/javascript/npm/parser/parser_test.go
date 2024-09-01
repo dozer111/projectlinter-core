@@ -25,7 +25,7 @@ func TestParseSuccess(t *testing.T) {
 	}
 
 	expectedPackageLock := &package_lock_json.RawPackageLockJSON{
-		map[string]*package_lock_json.RawPackageLockPackage{
+		map[string]*package_lock_json.RawNPMLockPackage{
 			"": {"1.0.0"},
 			"node_modules/@eslint-community/eslint-utils":                                  {"4.4.0"},
 			"node_modules/@eslint-community/eslint-utils/node_modules/eslint-visitor-keys": {"3.4.3"},

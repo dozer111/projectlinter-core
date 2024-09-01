@@ -1,9 +1,9 @@
 package package_lock_json
 
 type RawPackageLockJSON struct {
-	Packages map[string]*RawPackageLockPackage `json:"packages"`
+	Packages map[string]*RawNPMLockPackage `json:"packages"`
 }
 
-type RawPackageLockPackage struct {
+type RawNPMLockPackage struct {
 	Version string `json:"version"`
 }
