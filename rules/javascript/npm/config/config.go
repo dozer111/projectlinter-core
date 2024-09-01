@@ -14,8 +14,8 @@ type Config struct {
 }
 
 func NewNPMConfig(
-	pkg package_json.RawPackageJSON,
-	pkgLock package_lock_json.RawPackageLockJSON,
+	pkg *package_json.RawPackageJSON,
+	pkgLock *package_lock_json.RawPackageLockJSON,
 ) *Config {
 	dependenciesLen := len(pkg.Dependencies) + len(pkg.DevDependencies)
 	dependencies := NewNPMDependencies(dependenciesLen)
