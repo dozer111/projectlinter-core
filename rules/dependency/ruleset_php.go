@@ -2,12 +2,13 @@ package dependency
 
 import (
 	"github.com/dozer111/projectlinter-core/rules"
-	"github.com/dozer111/projectlinter-core/rules/dependency/bump"
-	"github.com/dozer111/projectlinter-core/rules/dependency/substitute"
 	composerConfig "github.com/dozer111/projectlinter-core/rules/php/composer/config"
 	"github.com/dozer111/projectlinter-core/rules/php/composer/config/composer_json"
 	"github.com/dozer111/projectlinter-core/rules/php/composer/parser"
 	"github.com/dozer111/projectlinter-core/util/path_provider"
+
+	"github.com/dozer111/projectlinter-core/rules/dependency/bump"
+	"github.com/dozer111/projectlinter-core/rules/dependency/substitute"
 )
 
 // PHPDependencySet reusable already created RuleSet
@@ -39,7 +40,7 @@ func NewPHPDependencySet(
 		pathProvider:    pathProvider,
 		substituteRules: substituteRules,
 		bumpRules:       bumpRules,
-		id:              "dependency",
+		id:              "dependency_php",
 	}
 }
 

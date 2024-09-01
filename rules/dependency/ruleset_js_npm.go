@@ -39,7 +39,7 @@ func NewJavascriptNPMDependencySet(
 		pathProvider:    pathProvider,
 		substituteRules: substituteRules,
 		bumpRules:       bumpRules,
-		id:              "dependency",
+		id:              "dependency_js_npm",
 	}
 }
 
