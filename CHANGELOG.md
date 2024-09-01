@@ -5,6 +5,7 @@
 ## Dependency
 
 - (chore) add json-schema autodetect in full-example files. [pull request](https://github.com/dozer111/projectlinter-core/pull/18)
+- (feat) add support js npm [pull request](https://github.com/dozer111/projectlinter-core/pull/19)
 
 
 ## PHP

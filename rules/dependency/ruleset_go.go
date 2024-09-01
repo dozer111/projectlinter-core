@@ -2,11 +2,12 @@ package dependency
 
 import (
 	"github.com/dozer111/projectlinter-core/rules"
-	"github.com/dozer111/projectlinter-core/rules/dependency/bump"
-	"github.com/dozer111/projectlinter-core/rules/dependency/substitute"
 	"github.com/dozer111/projectlinter-core/rules/golang/gomod/config"
 	"github.com/dozer111/projectlinter-core/rules/golang/gomod/parser"
 	"github.com/dozer111/projectlinter-core/util/path_provider"
+
+	"github.com/dozer111/projectlinter-core/rules/dependency/bump"
+	"github.com/dozer111/projectlinter-core/rules/dependency/substitute"
 )
 
 // GolangDependencySet reusable already created RuleSet
@@ -38,7 +39,7 @@ func NewGolangDependencySet(
 		pathProvider:    pathProvider,
 		substituteRules: substituteRules,
 		bumpRules:       bumpRules,
-		id:              "dependency",
+		id:              "dependency_golang",
 	}
 }
 

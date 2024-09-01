@@ -1,10 +1,12 @@
 package dependency_test
 
 import (
-	"github.com/dozer111/projectlinter-core/rules/dependency"
+	"testing"
+
 	"github.com/dozer111/projectlinter-core/util/path_provider"
 	utilTest "github.com/dozer111/projectlinter-core/util/test"
-	"testing"
+
+	"github.com/dozer111/projectlinter-core/rules/dependency"
 
 	"github.com/stretchr/testify/assert"
 )
