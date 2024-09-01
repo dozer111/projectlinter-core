@@ -1,3 +1,4 @@
+# $schema: https://raw.githubusercontent.com/dozer111/projectlinter-core/master/rules/dependency/substitute/json-schema.json
 name: private-custom-test-library
 changeTo: github.com/testcontainers/testcontainers-go
 description:
