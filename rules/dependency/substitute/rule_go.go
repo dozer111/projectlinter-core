@@ -1,8 +1,10 @@
 package substitute
 
 import (
-	"github.com/dozer111/projectlinter-core/rules"
 	"regexp"
+
+	"github.com/dozer111/projectlinter-core/rules"
+	"github.com/dozer111/projectlinter-core/rules/golang/gomod/config"
 )
 
 type SubstituteGOLibraryRule struct {
@@ -35,6 +37,11 @@ func (r *SubstituteGOLibraryRule) Validate() {
 	cleanDependencies := make(dependencyMap, len(r.dependencies))
 
 	for _, d := range r.dependencies {
+
+		if d.(*config.GomodDependency).IsIndirect() {
+			continue
+		}
+
 		dName := d.Name()
 		if goLibraryNameWithVersion.MatchString(d.Name()) {
 			dName = goLibraryNameWithoutVersion.FindStringSubmatch(dName)[1]

@@ -1,9 +1,11 @@
 package substitute_test
 
 import (
-	"github.com/dozer111/projectlinter-core/rules/dependency/substitute"
-	"github.com/dozer111/projectlinter-core/rules/golang/gomod/config"
 	"testing"
+
+	"github.com/dozer111/projectlinter-core/rules/golang/gomod/config"
+
+	"github.com/dozer111/projectlinter-core/rules/dependency/substitute"
 
 	"github.com/Masterminds/semver/v3"
 	"github.com/stretchr/testify/assert"
@@ -26,24 +28,59 @@ func TestSubstituteGOLibraryRulePass(t *testing.T) {
 				"github.com/chenzhuoyu/iasm",
 				"v0.9.1",
 				semver.MustParse("0.9.1"),
+				false,
 			),
-		)
-
-		indirectDeps := config.NewGODependencies(0)
-		indirectDeps.Add(
 			config.NewGomodDependency(
 				"github.com/blendle/zapdriver",
 				"v1.3.1",
 				semver.MustParse("1.3.1"),
+				false,
 			),
 		)
 
-		substituteDependencies := goDependenciesToSubstituteDependencies(directDeps.Merge(indirectDeps))
+		substituteDependencies := goDependenciesToSubstituteDependencies(directDeps)
 		r := substitute.NewSubstituteGOLibraryRule("gomod", cfg, substituteDependencies)
 		r.Validate()
 
 		assert.True(t, r.IsPassed())
 	})
+}
+
+func TestSubstituteGOLibraryRule_Ignore_Indirect_Dependencies(t *testing.T) {
+	cfg := []substitute.Library{
+		{
+			Name: "github.com/agnivade/levenshtein",
+		},
+		{
+			Name: "github.com/beorn7/perks",
+		},
+	}
+
+	directDeps := config.NewGODependencies(0)
+	directDeps.Add(
+		config.NewGomodDependency(
+			"github.com/chenzhuoyu/iasm",
+			"v0.9.1",
+			semver.MustParse("0.9.1"),
+			false,
+		),
+	)
+
+	indirectDeps := config.NewGODependencies(0)
+	indirectDeps.Add(
+		config.NewGomodDependency(
+			"github.com/beorn7/perks",
+			"v1.3.1",
+			semver.MustParse("1.3.1"),
+			true,
+		),
+	)
+
+	substituteDependencies := goDependenciesToSubstituteDependencies(directDeps.Merge(indirectDeps))
+	r := substitute.NewSubstituteGOLibraryRule("gomod", cfg, substituteDependencies)
+	r.Validate()
+
+	assert.True(t, r.IsPassed())
 }
 
 func TestSubstituteGOLibraryRuleFail(t *testing.T) {
@@ -60,6 +97,7 @@ func TestSubstituteGOLibraryRuleFail(t *testing.T) {
 				"github.com/chenzhuoyu/iasm",
 				"v0.9.1",
 				semver.MustParse("0.9.1"),
+				false,
 			),
 		)
 
@@ -91,23 +129,22 @@ func TestSubstituteLibraryGORuleHandleVersionSuffix(t *testing.T) {
 		}
 
 		directDeps := config.NewGODependencies(0)
-		directDeps.Add(config.NewGomodDependency(
-			"github.com/Masterminds/sprig/v3",
-			"v3.9.5",
-			semver.MustParse("3.9.5"),
-		),
-		)
-
-		indirectDeps := config.NewGODependencies(0)
-		indirectDeps.Add(
+		directDeps.Add(
+			config.NewGomodDependency(
+				"github.com/Masterminds/sprig/v3",
+				"v3.9.5",
+				semver.MustParse("3.9.5"),
+				false,
+			),
 			config.NewGomodDependency(
 				"github.com/pmezard/go-difflib/v2",
 				"v2.0.6",
 				semver.MustParse("2.0.6"),
+				false,
 			),
 		)
 
-		substituteDependencies := goDependenciesToSubstituteDependencies(directDeps.Merge(indirectDeps))
+		substituteDependencies := goDependenciesToSubstituteDependencies(directDeps)
 		r := substitute.NewSubstituteGOLibraryRule("gomod", configs, substituteDependencies)
 		r.Validate()
 
@@ -125,23 +162,22 @@ func TestSubstituteLibraryGORuleHandleVersionSuffix(t *testing.T) {
 		}
 
 		directDeps := config.NewGODependencies(0)
-		directDeps.Add(config.NewGomodDependency(
-			"github.com/Masterminds/sprig",
-			"v3.9.5",
-			semver.MustParse("3.9.5"),
-		),
-		)
-
-		indirectDeps := config.NewGODependencies(0)
-		indirectDeps.Add(
+		directDeps.Add(
+			config.NewGomodDependency(
+				"github.com/Masterminds/sprig",
+				"v3.9.5",
+				semver.MustParse("3.9.5"),
+				false,
+			),
 			config.NewGomodDependency(
 				"github.com/pmezard/go-difflib",
 				"v2.0.6",
 				semver.MustParse("2.0.6"),
+				false,
 			),
 		)
 
-		substituteDependencies := goDependenciesToSubstituteDependencies(directDeps.Merge(indirectDeps))
+		substituteDependencies := goDependenciesToSubstituteDependencies(directDeps)
 		r := substitute.NewSubstituteGOLibraryRule("gomod", configs, substituteDependencies)
 		r.Validate()
 
@@ -163,19 +199,17 @@ func TestSubstituteLibraryGORuleHandleVersionSuffix(t *testing.T) {
 			"github.com/Masterminds/sprig/v3",
 			"v3.9.5",
 			semver.MustParse("3.9.5"),
+			false,
 		),
-		)
-
-		indirectDeps := config.NewGODependencies(0)
-		indirectDeps.Add(
 			config.NewGomodDependency(
 				"github.com/pmezard/go-difflib/v2",
 				"v2.0.6",
 				semver.MustParse("2.0.6"),
+				false,
 			),
 		)
 
-		substituteDependencies := goDependenciesToSubstituteDependencies(directDeps.Merge(indirectDeps))
+		substituteDependencies := goDependenciesToSubstituteDependencies(directDeps)
 		r := substitute.NewSubstituteGOLibraryRule("gomod", configs, substituteDependencies)
 		r.Validate()
 
