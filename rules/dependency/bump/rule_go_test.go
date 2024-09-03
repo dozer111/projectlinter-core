@@ -1,9 +1,11 @@
 package bump_test
 
 import (
-	"github.com/dozer111/projectlinter-core/rules/dependency/bump"
-	"github.com/dozer111/projectlinter-core/rules/golang/gomod/config"
 	"testing"
+
+	"github.com/dozer111/projectlinter-core/rules/golang/gomod/config"
+
+	"github.com/dozer111/projectlinter-core/rules/dependency/bump"
 
 	"github.com/Masterminds/semver/v3"
 	"github.com/stretchr/testify/assert"
@@ -23,29 +25,73 @@ func TestBumpLibraryGORulePass(t *testing.T) {
 		}
 
 		directDeps := config.NewGODependencies(0)
-		directDeps.Add(config.NewGomodDependency(
-			"github.com/pelletier/go-toml",
-			"v1.9.5",
-			semver.MustParse("1.9.5"),
-		),
-		)
-
-		indirectDeps := config.NewGODependencies(0)
-		indirectDeps.Add(
+		directDeps.Add(
+			config.NewGomodDependency(
+				"github.com/pelletier/go-toml",
+				"v1.9.5",
+				semver.MustParse("1.9.5"),
+				false,
+			),
 			config.NewGomodDependency(
 				"github.com/beorn7/perks",
 				"v1.0.1",
 				semver.MustParse("1.0.1"),
+				false,
 			),
 		)
 
-		bumpDependencies := goDependenciesToBumpDependencies(directDeps.Merge(indirectDeps))
+		bumpDependencies := goDependenciesToBumpDependencies(directDeps)
 
 		r := bump.NewBumpGOLibraryRule("gomod", configs, bumpDependencies)
 		r.Validate()
 
 		assert.True(t, r.IsPassed())
 	})
+}
+
+func TestBumpLibraryGORule_Ignore_Indirect_Dependencies(t *testing.T) {
+	// It is crucial to understand
+	// Golang dependency rules MUST ONLY CHECK THE DIRECT DEPENDENCIES!
+	// Why - because indirect dependencies are also exists in go.mod(instead as in other programming languages)
+	// so, if the rule trigger on it - this is false positive check
+
+	configs := []bump.Library{
+		{
+			Name:    "github.com/pelletier/go-toml",
+			Version: "1.5",
+		},
+		{
+			Name:    "github.com/beorn7/perks",
+			Version: "2.0",
+		},
+	}
+
+	directDeps := config.NewGODependencies(0)
+	directDeps.Add(
+		config.NewGomodDependency(
+			"github.com/pelletier/go-toml",
+			"v1.9.5",
+			semver.MustParse("1.9.5"),
+			false,
+		),
+	)
+
+	indirectDeps := config.NewGODependencies(0)
+	indirectDeps.Add(
+		config.NewGomodDependency(
+			"github.com/beorn7/perks",
+			"v1.1.15",
+			semver.MustParse("1.1.15"),
+			true,
+		),
+	)
+
+	bumpDependencies := goDependenciesToBumpDependencies(directDeps.Merge(indirectDeps))
+
+	r := bump.NewBumpGOLibraryRule("gomod", configs, bumpDependencies)
+	r.Validate()
+
+	assert.True(t, r.IsPassed())
 }
 
 func TestBumpLibraryGORuleFail(t *testing.T) {
@@ -63,12 +109,11 @@ func TestBumpLibraryGORuleFail(t *testing.T) {
 				"github.com/pkg/errors",
 				"v1.9.1",
 				semver.MustParse("1.9"),
+				false,
 			),
 		)
 
-		indirectDeps := config.NewGODependencies(0)
-
-		bumpDependencies := goDependenciesToBumpDependencies(directDeps.Merge(indirectDeps))
+		bumpDependencies := goDependenciesToBumpDependencies(directDeps)
 		r := bump.NewBumpGOLibraryRule("gomod", configs, bumpDependencies)
 		r.Validate()
 
@@ -89,16 +134,19 @@ func TestBumpLibraryGORuleFail(t *testing.T) {
 				"github.com/pkg/errors/v3",
 				"v3.2.0",
 				semver.MustParse("3.2"),
+				false,
 			),
 			config.NewGomodDependency(
 				"github.com/pkg/errors/v3",
 				"v2.17.0",
 				semver.MustParse("2.17"),
+				false,
 			),
 			config.NewGomodDependency(
 				"github.com/pkg/errors",
 				"v1.9.1",
 				semver.MustParse("1.9"),
+				false,
 			),
 		)
 
@@ -134,19 +182,17 @@ func TestBumpLibraryGORuleHandleVersionSuffix(t *testing.T) {
 			"github.com/Masterminds/sprig/v3",
 			"v3.9.5",
 			semver.MustParse("3.9.5"),
+			false,
 		),
-		)
-
-		indirectDeps := config.NewGODependencies(0)
-		indirectDeps.Add(
 			config.NewGomodDependency(
 				"github.com/pmezard/go-difflib/v2",
 				"v2.0.6",
 				semver.MustParse("2.0.6"),
+				false,
 			),
 		)
 
-		bumpDependencies := goDependenciesToBumpDependencies(directDeps.Merge(indirectDeps))
+		bumpDependencies := goDependenciesToBumpDependencies(directDeps)
 
 		r := bump.NewBumpGOLibraryRule("gomod", configs, bumpDependencies)
 		r.Validate()
@@ -167,23 +213,22 @@ func TestBumpLibraryGORuleHandleVersionSuffix(t *testing.T) {
 		}
 
 		directDeps := config.NewGODependencies(0)
-		directDeps.Add(config.NewGomodDependency(
-			"github.com/Masterminds/sprig",
-			"v3.9.5",
-			semver.MustParse("3.9.5"),
-		),
-		)
-
-		indirectDeps := config.NewGODependencies(0)
-		indirectDeps.Add(
+		directDeps.Add(
+			config.NewGomodDependency(
+				"github.com/Masterminds/sprig",
+				"v3.9.5",
+				semver.MustParse("3.9.5"),
+				false,
+			),
 			config.NewGomodDependency(
 				"github.com/pmezard/go-difflib",
 				"v2.0.6",
 				semver.MustParse("2.0.6"),
+				false,
 			),
 		)
 
-		bumpDependencies := goDependenciesToBumpDependencies(directDeps.Merge(indirectDeps))
+		bumpDependencies := goDependenciesToBumpDependencies(directDeps)
 
 		r := bump.NewBumpGOLibraryRule("gomod", configs, bumpDependencies)
 		r.Validate()
@@ -208,19 +253,17 @@ func TestBumpLibraryGORuleHandleVersionSuffix(t *testing.T) {
 			"github.com/Masterminds/sprig/v3",
 			"v3.9.5",
 			semver.MustParse("3.9.5"),
+			false,
 		),
-		)
-
-		indirectDeps := config.NewGODependencies(0)
-		indirectDeps.Add(
 			config.NewGomodDependency(
 				"github.com/pmezard/go-difflib/v2",
 				"v2.0.6",
 				semver.MustParse("2.0.6"),
+				false,
 			),
 		)
 
-		bumpDependencies := goDependenciesToBumpDependencies(directDeps.Merge(indirectDeps))
+		bumpDependencies := goDependenciesToBumpDependencies(directDeps)
 
 		r := bump.NewBumpGOLibraryRule("gomod", configs, bumpDependencies)
 		r.Validate()

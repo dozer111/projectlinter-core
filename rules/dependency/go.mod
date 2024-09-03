@@ -6,7 +6,7 @@ require (
 	github.com/1set/gut v0.0.0-20201117175203-a82363231997
 	github.com/Masterminds/semver/v3 v3.3.0
 	github.com/dozer111/projectlinter-core v1.0.0
-	github.com/dozer111/projectlinter-core/rules/golang/gomod v1.0.0
+	github.com/dozer111/projectlinter-core/rules/golang/gomod v1.0.1-0.20240903062051-702b53c7ec31
 	github.com/dozer111/projectlinter-core/rules/javascript/npm v1.0.0
 	github.com/dozer111/projectlinter-core/rules/php/composer v1.0.0
 	github.com/stretchr/testify v1.9.0
@@ -16,6 +16,7 @@ require (
 
 require (
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
+	github.com/google/go-cmp v0.6.0 // indirect
 	github.com/kr/text v0.2.0 // indirect
 	github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 // indirect
 	github.com/rogpeppe/go-internal v1.12.0 // indirect
