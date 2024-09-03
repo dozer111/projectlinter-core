@@ -1,8 +1,10 @@
 package bump
 
 import (
-	"github.com/dozer111/projectlinter-core/rules"
 	"regexp"
+
+	"github.com/dozer111/projectlinter-core/rules"
+	"github.com/dozer111/projectlinter-core/rules/golang/gomod/config"
 
 	"github.com/Masterminds/semver/v3"
 )
@@ -59,6 +61,10 @@ func (r *BumpGOLibraryRule) Validate() {
 			proposedVersion, _ := semver.NewVersion(version)
 
 			for _, dependency := range cleanDependencies[cleanLibraryName] {
+				if dependency.(*config.GomodDependency).IsIndirect() {
+					continue
+				}
+
 				// version is the ONE source of truth
 				if dependency.Version() != nil &&
 					dependency.Version().LessThan(proposedVersion) {

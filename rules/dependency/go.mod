@@ -6,7 +6,7 @@ require (
 	github.com/1set/gut v0.0.0-20201117175203-a82363231997
 	github.com/Masterminds/semver/v3 v3.3.0
 	github.com/dozer111/projectlinter-core v1.0.0
-	github.com/dozer111/projectlinter-core/rules/golang/gomod v1.0.0
+	github.com/dozer111/projectlinter-core/rules/golang/gomod v1.0.1-0.20240903062051-702b53c7ec31
 	github.com/dozer111/projectlinter-core/rules/javascript/npm v1.0.0
 	github.com/dozer111/projectlinter-core/rules/php/composer v1.0.0
 	github.com/stretchr/testify v1.9.0
