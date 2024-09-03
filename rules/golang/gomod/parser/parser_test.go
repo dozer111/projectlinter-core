@@ -2,9 +2,11 @@ package parser_test
 
 import (
 	"errors"
-	gomodParser "github.com/dozer111/projectlinter-core/rules/golang/gomod/parser"
-	utilTest "github.com/dozer111/projectlinter-core/util/test"
 	"testing"
+
+	utilTest "github.com/dozer111/projectlinter-core/util/test"
+
+	gomodParser "github.com/dozer111/projectlinter-core/rules/golang/gomod/parser"
 
 	"github.com/stretchr/testify/assert"
 )

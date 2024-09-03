@@ -14,16 +14,19 @@ type GomodDependency struct {
 	name       string
 	version    *semver.Version
 	versionRaw string
+	indirect   bool
 }
 
 func NewGomodDependency(
 	name, versionRaw string,
 	version *semver.Version,
+	isIndirect bool,
 ) *GomodDependency {
 	return &GomodDependency{
 		name,
 		version,
 		versionRaw,
+		isIndirect,
 	}
 }
 
@@ -37,4 +40,8 @@ func (d GomodDependency) Version() *semver.Version {
 
 func (d GomodDependency) VersionRaw() string {
 	return d.versionRaw
+}
+
+func (d GomodDependency) IsIndirect() bool {
+	return d.indirect
 }

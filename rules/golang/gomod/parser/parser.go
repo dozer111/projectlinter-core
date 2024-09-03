@@ -3,9 +3,10 @@ package parser
 import (
 	"errors"
 	"fmt"
-	"github.com/dozer111/projectlinter-core/rules/golang/gomod/config"
 	"io"
 	"os"
+
+	"github.com/dozer111/projectlinter-core/rules/golang/gomod/config"
 
 	"github.com/1set/gut/yos"
 	"github.com/Masterminds/semver/v3"
@@ -54,7 +55,7 @@ func (p *Parser) Parse() (*config.Config, error) {
 
 	for _, d := range mf.Require {
 		v, _ := semver.NewVersion(d.Mod.Version)
-		result.Dependencies.Add(config.NewGomodDependency(d.Mod.Path, d.Mod.Version, v))
+		result.Dependencies.Add(config.NewGomodDependency(d.Mod.Path, d.Mod.Version, v, d.Indirect))
 	}
 
 	return result, nil

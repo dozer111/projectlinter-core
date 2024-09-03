@@ -14,7 +14,7 @@ func NewGODependencies(len int) *GomodDependencies {
 	}
 }
 
-func (d *GomodDependencies) Add(dependencies ...*GomodDependency) {
+func (d *GomodDependencies) Add(dependencies ...*GomodDependency) *GomodDependencies {
 	for _, dependency := range dependencies {
 		if len(d.dependencies[dependency.Name()]) == 0 {
 			d.dependencies[dependency.Name()] = make([]*GomodDependency, 0, 2)
@@ -22,6 +22,8 @@ func (d *GomodDependencies) Add(dependencies ...*GomodDependency) {
 
 		d.dependencies[dependency.Name()] = append(d.dependencies[dependency.Name()], dependency)
 	}
+
+	return d
 }
 
 func (d *GomodDependencies) Has(dependency string) bool {
