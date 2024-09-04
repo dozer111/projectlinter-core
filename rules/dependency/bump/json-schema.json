@@ -41,6 +41,13 @@
             "type": "string",
             "description": "Project title"
           },
+          "description": {
+            "type": "array",
+            "description": "An additional explanation about this example. More verbose your suggestion - more easy to implement for user",
+            "items": {
+              "type": "string"
+            }
+          },
           "committee": {
             "type": "string",
             "description": "The nickname of the person who write the code(so that you can choose the person you trust the most from the list of people)"
