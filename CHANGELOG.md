@@ -6,7 +6,12 @@
 
 - (chore) add json-schema autodetect in full-example files. [pull request](https://github.com/dozer111/projectlinter-core/pull/18)
 - (feat) add support js npm [pull request](https://github.com/dozer111/projectlinter-core/pull/19)
+- (bug) fix golang bump/substitute rules. Now they are checking only direct dependencies [pull request](https://github.com/dozer111/projectlinter-core/pull/20)
 
+
+## Golang
+
+- (chore) extend dependency struct. Now it has also method `IsIndirect() bool`
 
 ## PHP
 
