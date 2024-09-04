@@ -4,11 +4,12 @@ import (
 	"bytes"
 	"flag"
 	"fmt"
-	"github.com/dozer111/projectlinter-core/rules/dependency/substitute"
 	"log"
 	"os"
 	"os/exec"
 	"strings"
+
+	"github.com/dozer111/projectlinter-core/rules/dependency/substitute"
 
 	"github.com/1set/gut/yos"
 )
@@ -112,6 +113,12 @@ func printConfig(cfg substitute.Library) string {
 			tpl = append(tpl, "Links: []string{")
 			for _, exLink := range ex.Links {
 				tpl = append(tpl, fmt.Sprintf(`"%s",`, exLink))
+			}
+			tpl = append(tpl, "},")
+
+			tpl = append(tpl, "Description: []string{")
+			for _, descriptionMessage := range ex.Description {
+				tpl = append(tpl, fmt.Sprintf(`"%s",`, descriptionMessage))
 			}
 			tpl = append(tpl, "},")
 

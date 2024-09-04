@@ -1,10 +1,11 @@
 package substitute
 
 import (
-	"github.com/dozer111/projectlinter-core/util/painter"
-	"github.com/stretchr/testify/assert"
 	"strings"
 	"testing"
+
+	"github.com/dozer111/projectlinter-core/util/painter"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestPrinterOnFullCorrectExample(t *testing.T) {
@@ -34,18 +35,24 @@ func TestPrinterOnFullCorrectExample(t *testing.T) {
 			},
 			Examples: []Example{
 				{
-					ProjectName: "auth-sv",
-					Programmer:  "wager",
-					Links: []string{
+					"auth-sv",
+					"wager",
+					[]string{
+						"something",
+						"really important to know",
+						"about this code",
+					},
+					[]string{
 						"https://your.git.com/auth-sv/commits/69a1bb1f09cbe5796f95edf7066be46effcd5ffe",
 						"https://your.git.com/auth-sv/commits/69a1bb1f09cbe5796f922237066be46effcd5ffe",
 						"https://your.git.com/auth-sv/commits/69a1bb1f09cbegggg121edf7066be46effcd5ffe",
 					},
 				},
 				{
-					ProjectName: "payment-sv",
-					Programmer:  "dozer111",
-					Links: []string{
+					"payment-sv",
+					"dozer111",
+					nil,
+					[]string{
 						"https://your.git.com/payment-sv/pull-requests/100",
 					},
 				},
@@ -85,6 +92,11 @@ func TestPrinterOnFullCorrectExample(t *testing.T) {
 (yellow)	- onyxia
 (yellow)Examples:
 (yellow)	  auth-sv: (wager)
+
+(yellow)	    something
+(yellow)	    really important to know
+(yellow)	    about this code
+
 (yellow)	    - https://your.git.com/auth-sv/commits/69a1bb1f09cbe5796f95edf7066be46effcd5ffe
 (yellow)	    - https://your.git.com/auth-sv/commits/69a1bb1f09cbe5796f922237066be46effcd5ffe
 (yellow)	    - https://your.git.com/auth-sv/commits/69a1bb1f09cbegggg121edf7066be46effcd5ffe

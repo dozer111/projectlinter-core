@@ -2,6 +2,7 @@ package substitute
 
 import (
 	"fmt"
+
 	"github.com/dozer111/projectlinter-core/util/painter"
 )
 
@@ -58,6 +59,15 @@ func (p *substituteLibraryPrinter) Print() []string {
 			output = append(output, paint.Yellow("Examples:"))
 			for _, example := range library.Examples {
 				output = append(output, paint.Yellow(fmt.Sprintf("\t  %s: (%s)", example.ProjectName, example.Programmer)))
+
+				if len(example.Description) > 0 {
+					output = append(output, "")
+					for _, descriptionMessage := range example.Description {
+						output = append(output, paint.Yellow(fmt.Sprintf("\t    %s", descriptionMessage)))
+					}
+					output = append(output, "")
+				}
+
 				for _, exampleLink := range example.Links {
 					output = append(output, paint.Yellow(fmt.Sprintf("\t    - %s", exampleLink)))
 				}
