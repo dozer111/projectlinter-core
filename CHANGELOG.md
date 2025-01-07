@@ -7,6 +7,7 @@
 - (chore) add json-schema autodetect in full-example files. [pull request](https://github.com/dozer111/projectlinter-core/pull/18)
 - (feat) add support js npm [pull request](https://github.com/dozer111/projectlinter-core/pull/19)
 - (bug) fix golang bump/substitute rules. Now they are checking only direct dependencies [pull request](https://github.com/dozer111/projectlinter-core/pull/20)
+- (feat) extend example block. Add new field "description" [pull request](https://github.com/dozer111/projectlinter-core/pull/21)
 
 
 ## Golang
