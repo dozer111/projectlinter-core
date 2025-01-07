@@ -2,11 +2,13 @@ package substitute_test
 
 import (
 	"errors"
-	"github.com/dozer111/projectlinter-core/rules/dependency/substitute"
-	utilTest "github.com/dozer111/projectlinter-core/util/test"
 	"reflect"
 	"strings"
 	"testing"
+
+	utilTest "github.com/dozer111/projectlinter-core/util/test"
+
+	"github.com/dozer111/projectlinter-core/rules/dependency/substitute"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -22,6 +24,11 @@ func TestParserSuccessCase(t *testing.T) {
 				{
 					"auth-sv",
 					"dozer111",
+					[]string{
+						"!IMPORTANT",
+						"add lock.yaml",
+						"configure in in cmd/main/init.go",
+					},
 					[]string{
 						"https://your_git.com/auth-sv/commits/c836698e64149412fab971e2252396e9370394f7",
 						"https://your_git.com/auth-sv/commits/0ce7f3c9ee28c28d7ec96df459e45b443f3c16b6",

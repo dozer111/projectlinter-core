@@ -1,9 +1,10 @@
 package bump
 
 import (
-	"github.com/dozer111/projectlinter-core/util/painter"
 	"strings"
 	"testing"
+
+	"github.com/dozer111/projectlinter-core/util/painter"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -30,6 +31,7 @@ func TestPrinterOnFullCorrectExample(t *testing.T) {
 				{
 					"auth-sv",
 					"dozer111",
+					nil,
 					[]string{
 						"https://your_git.com/auth-sv/pull-requests/91/overview",
 					},
@@ -37,6 +39,11 @@ func TestPrinterOnFullCorrectExample(t *testing.T) {
 				{
 					"payment-sv",
 					"goro",
+					[]string{
+						"something",
+						"really important to know",
+						"about this code",
+					},
 					[]string{
 						"https://your_git.com/payment-sv/commits/69a1bb1f09cbe5796f95edf7066be46effcd5ffe",
 						"https://your_git.com/payment-sv/commits/69a1bb1f09cbe5796f95edf7066be46effddd12q",
@@ -69,6 +76,11 @@ func TestPrinterOnFullCorrectExample(t *testing.T) {
 (yellow)	  auth-sv: (dozer111)
 (yellow)	    - https://your_git.com/auth-sv/pull-requests/91/overview
 (yellow)	  payment-sv: (goro)
+
+(yellow)	    something
+(yellow)	    really important to know
+(yellow)	    about this code
+
 (yellow)	    - https://your_git.com/payment-sv/commits/69a1bb1f09cbe5796f95edf7066be46effcd5ffe
 (yellow)	    - https://your_git.com/payment-sv/commits/69a1bb1f09cbe5796f95edf7066be46effddd12q`
 	assert.Equal(t, expectedOutput, strings.Join(output, "\n"))

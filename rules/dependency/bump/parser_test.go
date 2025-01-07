@@ -2,11 +2,13 @@ package bump_test
 
 import (
 	"errors"
-	"github.com/dozer111/projectlinter-core/rules/dependency/bump"
-	utilTest "github.com/dozer111/projectlinter-core/util/test"
 	"reflect"
 	"strings"
 	"testing"
+
+	utilTest "github.com/dozer111/projectlinter-core/util/test"
+
+	"github.com/dozer111/projectlinter-core/rules/dependency/bump"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -40,6 +42,11 @@ func TestParserSuccessCase(t *testing.T) {
 					"service2",
 					"olof",
 					[]string{
+						"!IMPORTANT",
+						"add lock.yaml",
+						"configure in in cmd/main/init.go",
+					},
+					[]string{
 						"https://your_git.com/some-service2/pull-requests/67/commits/0f2ce352e31c09aa79f13037c839b56ba701ba15",
 					},
 				},
@@ -56,6 +63,7 @@ func TestParserSuccessCase(t *testing.T) {
 				{
 					"some-service",
 					"dozer111",
+					nil,
 					[]string{
 						"https://your_git.com/service1/commits/228b2749cdec314558f04284b836b9d609f89e9f#rector.php",
 					},

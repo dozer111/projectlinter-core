@@ -11,5 +11,6 @@ type Library struct {
 type Example struct {
 	ProjectName string   `yaml:"projectName"`
 	Programmer  string   `yaml:"committee"`
+	Description []string `yaml:"description,omitempty"`
 	Links       []string `yaml:"links"`
 }

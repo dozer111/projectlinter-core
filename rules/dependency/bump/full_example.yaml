@@ -9,11 +9,22 @@ description:
   - "The internal code was splitted to \"system\" and \"base\" limits"
   - "You need to do little update after. See examples"
 examples:
+  - projectName: client-sv
+    committee: catlovers
+    links:
+      - https://your_git.com/client-sv/pull-requests/5/overview
   - projectName: auth-sv
     committee: dozer111
+    description:
+      - "just update the config/auth.yaml"
     links:
       - https://your_git.com/auth-sv/pull-requests/91/overview
   - projectName: payment-sv
     committee: dondo
+    description:
+      - "more harder case"
+      - "1. update auth.yaml file"
+      - "2. check that all the implementation <SomeInterface1> also implement <SomeInterface2>"
     links:
       - https://your_git.com/payment-sv/commits/69a1bb1f09cbe5796f95edf7066be46effcd5ffe
+

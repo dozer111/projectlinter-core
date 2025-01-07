@@ -9,5 +9,9 @@ examples:
       - https://your_git.com/some-service/commits/497e11b2a6dda145a11e8384d48bc6fe97aa2de2
   - projectName: service2
     committee: olof
+    description:
+      - "!IMPORTANT"
+      - "add lock.yaml"
+      - "configure in in cmd/main/init.go"
     links:
       - https://your_git.com/some-service2/pull-requests/67/commits/0f2ce352e31c09aa79f13037c839b56ba701ba15

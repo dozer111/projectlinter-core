@@ -19,5 +19,9 @@ examples:
       - https://your_git.com/projects/repos/auth-sv/pull-requests/91/overview
   - projectName: payment-sv
     committee: catLovers
+    description:
+      - "more harder case"
+      - "1. update payment.yaml config"
+      - "2. check that all the implementation <SomeInterface1> also implement <SomeInterface2>"
     links:
       - https://your_git.com/projects/repos/payment-sv/commits/69a1bb1f09cbe5796f95edf7066be46effcd5ffe
