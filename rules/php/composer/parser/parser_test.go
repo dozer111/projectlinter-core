@@ -2,12 +2,14 @@ package parser_test
 
 import (
 	"errors"
+	"testing"
+
+	utilTest "github.com/dozer111/projectlinter-core/util/test"
+	"github.com/google/go-cmp/cmp"
+
 	"github.com/dozer111/projectlinter-core/rules/php/composer/config/composer_json"
 	"github.com/dozer111/projectlinter-core/rules/php/composer/config/composer_lock"
 	"github.com/dozer111/projectlinter-core/rules/php/composer/parser"
-	utilTest "github.com/dozer111/projectlinter-core/util/test"
-	"github.com/google/go-cmp/cmp"
-	"testing"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -15,9 +17,9 @@ import (
 func TestParseSuccess(t *testing.T) {
 	expectedComposerJson := &composer_json.RawComposerJson{
 		"private-git/some-project",
-		utilTest.ToPointer("project"),
-		utilTest.ToPointer("some php project"),
-		utilTest.ToPointer("proprietary"),
+		pointer("project"),
+		pointer("some php project"),
+		pointer("proprietary"),
 		nil,
 		nil,
 		map[string]string{
@@ -45,11 +47,10 @@ func TestParseSuccess(t *testing.T) {
 			},
 		},
 		&composer_json.RawComposerJsonConfigSection{
-			utilTest.ToPointer(true),
-			utilTest.ToPointer(map[string]string{
-				"php": "8.2",
-			}),
-			utilTest.ToPointer(map[string]bool{
+			pointer(true),
+			pointer("dev"),
+			pointer(map[string]string{"php": "8.2"}),
+			pointer(map[string]bool{
 				"symfony/flex":       true,
 				"php-http/discovery": true,
 			}),
@@ -144,4 +145,8 @@ func TestParserReturnErrorWhileComposerLockIsAbsent(t *testing.T) {
 	assert.Nil(t, actualComposerLock)
 	assert.Error(t, err)
 	assert.True(t, errors.Is(err, parser.ComposerLockNotFound))
+}
+
+func pointer[T any](val T) *T {
+	return &val
 }

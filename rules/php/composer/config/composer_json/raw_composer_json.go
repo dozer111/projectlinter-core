@@ -23,9 +23,10 @@ type RawComposerJson struct {
 }
 
 type RawComposerJsonConfigSection struct {
-	SortPackages *bool              `json:"sort-packages,omitempty"`
-	Platform     *map[string]string `json:"platform,omitempty"`
-	AllowPlugins *map[string]bool   `json:"allow-plugins,omitempty"`
+	SortPackages    *bool              `json:"sort-packages,omitempty"`
+	BumpAfterUpdate *string            `json:"bump-after-update,omitempty"`
+	Platform        *map[string]string `json:"platform,omitempty"`
+	AllowPlugins    *map[string]bool   `json:"allow-plugins,omitempty"`
 }
 
 type RawComposerJsonAutoloadSection struct {
