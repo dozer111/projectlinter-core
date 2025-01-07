@@ -21,3 +21,7 @@
 - **composer**: improve rule "section is correct": [issue](https://github.com/dozer111/projectlinter-core/issues/15)
   - https://github.com/dozer111/projectlinter-core/pull/16
   - https://github.com/dozer111/projectlinter-core/pull/17
+
+### parser
+
+- become to parse section "config.bump-after-update" [pull-request](https://github.com/dozer111/projectlinter-core/pull/22)
