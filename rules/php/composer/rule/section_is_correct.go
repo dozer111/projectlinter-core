@@ -7,6 +7,8 @@ import (
 
 	"github.com/dozer111/projectlinter-core/printer"
 	"github.com/dozer111/projectlinter-core/rules"
+
+	composerCustomType "github.com/dozer111/projectlinter-core/rules/php/composer/config/composer_json/type"
 )
 
 // SectionHasCorrectValueRule check the simple section(the value is primitive) value is correct
@@ -130,6 +132,13 @@ func (r *SectionHasCorrectValueRule[T]) failedMessageNewCode(section string, val
 		return fmt.Sprintf(`"%s": "%s",`, section, value)
 	case bool:
 		return fmt.Sprintf(`"%s": %t,`, section, value)
+	case composerCustomType.BoolString:
+		v := value.(composerCustomType.BoolString)
+		if v.IsBool {
+			return r.failedMessageNewCode(section, v.BoolVal)
+		}
+
+		return r.failedMessageNewCode(section, v.StrVal)
 	default:
 		panic(fmt.Sprintf("type %T is not supported", value))
 	}
