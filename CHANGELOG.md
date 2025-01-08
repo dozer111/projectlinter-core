@@ -24,4 +24,6 @@
 
 ### parser
 
-- become to parse section "config.bump-after-update" [pull-request](https://github.com/dozer111/projectlinter-core/pull/22)
+- become to parse section "config.bump-after-update" 
+  - https://github.com/dozer111/projectlinter-core/pull/22
+  - https://github.com/dozer111/projectlinter-core/pull/23
