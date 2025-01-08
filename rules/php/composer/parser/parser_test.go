@@ -8,6 +8,7 @@ import (
 	"github.com/google/go-cmp/cmp"
 
 	"github.com/dozer111/projectlinter-core/rules/php/composer/config/composer_json"
+	composerCustomType "github.com/dozer111/projectlinter-core/rules/php/composer/config/composer_json/type"
 	"github.com/dozer111/projectlinter-core/rules/php/composer/config/composer_lock"
 	"github.com/dozer111/projectlinter-core/rules/php/composer/parser"
 
@@ -48,7 +49,7 @@ func TestParseSuccess(t *testing.T) {
 		},
 		&composer_json.RawComposerJsonConfigSection{
 			pointer(true),
-			pointer("dev"),
+			&composerCustomType.BoolString{StrVal: "dev"},
 			pointer(map[string]string{"php": "8.2"}),
 			pointer(map[string]bool{
 				"symfony/flex":       true,
