@@ -3,11 +3,14 @@ package rule
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/dozer111/projectlinter-core/printer"
-	"github.com/dozer111/projectlinter-core/rules"
-	"github.com/dozer111/projectlinter-core/rules/php/composer/config/composer_json"
 	"strings"
 	"unsafe"
+
+	"github.com/dozer111/projectlinter-core/printer"
+	"github.com/dozer111/projectlinter-core/rules"
+
+	"github.com/dozer111/projectlinter-core/rules/php/composer/config/composer_json"
+	composerCustomType "github.com/dozer111/projectlinter-core/rules/php/composer/config/composer_json/type"
 )
 
 // SectionExistsRule checking whether there is any "simple" block(the value is primitive)
@@ -48,7 +51,7 @@ func (r *SectionExistsRule) IsPassed() bool {
 
 func (r *SectionExistsRule) FailedMessage() []string {
 	if len(r.section) == 1 {
-		newCode := r.failedMessageNewCode(r.section[0])
+		newCode := r.failedMessageNewCode(r.section[0], r.proposedValue)
 
 		return printer.NewCodeHintPrinter(
 			nil,
@@ -65,7 +68,7 @@ func (r *SectionExistsRule) FailedMessage() []string {
 		if i != len(r.section)-1 {
 			codeBefore = append(codeBefore, fmt.Sprintf(`%s"%s": {`, tab, s))
 		} else {
-			newCode = []string{fmt.Sprintf(`%s%s`, tab, r.failedMessageNewCode(s))}
+			newCode = []string{fmt.Sprintf(`%s%s`, tab, r.failedMessageNewCode(s, r.proposedValue))}
 		}
 	}
 
@@ -77,17 +80,24 @@ func (r *SectionExistsRule) FailedMessage() []string {
 	).Print()
 }
 
-func (r *SectionExistsRule) failedMessageNewCode(section string) string {
-	switch r.proposedValue.(type) {
+func (r *SectionExistsRule) failedMessageNewCode(section string, value any) string {
+	switch value.(type) {
 	case string:
-		return fmt.Sprintf(`"%s": "%s",`, section, r.proposedValue)
+		return fmt.Sprintf(`"%s": "%s",`, section, value)
 	case bool:
-		return fmt.Sprintf(`"%s": %t,`, section, r.proposedValue)
+		return fmt.Sprintf(`"%s": %t,`, section, value)
 	case composer_json.RawComposerJsonConfigSection:
-		js, _ := json.MarshalIndent(r.proposedValue, "", "	")
+		js, _ := json.MarshalIndent(value, "", "	")
 		v := fmt.Sprintf(`"%s": %s,`, section, js)
 		return v
+	case composerCustomType.BoolString:
+		v := value.(composerCustomType.BoolString)
+		if v.IsBool {
+			return r.failedMessageNewCode(section, v.BoolVal)
+		}
+
+		return r.failedMessageNewCode(section, v.StrVal)
 	}
 
-	panic(fmt.Sprintf("type %T is not supported", r.proposedValue))
+	panic(fmt.Sprintf("type %T is not supported", value))
 }
