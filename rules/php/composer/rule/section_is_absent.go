@@ -2,10 +2,13 @@ package rule
 
 import (
 	"fmt"
-	"github.com/dozer111/projectlinter-core/printer"
-	"github.com/dozer111/projectlinter-core/rules"
 	"strings"
 	"unsafe"
+
+	"github.com/dozer111/projectlinter-core/printer"
+	"github.com/dozer111/projectlinter-core/rules"
+
+	composerCustomType "github.com/dozer111/projectlinter-core/rules/php/composer/config/composer_json/type"
 )
 
 // SectionIsAbsentRule checking that some "simple" block(the value is primitive) is missing
@@ -46,7 +49,7 @@ func (r *SectionIsAbsentRule) FailedMessage() []string {
 	if len(r.section) == 1 {
 		return printer.NewCodeHintPrinter(
 			nil,
-			[]string{r.failedMessageNewCode(r.section[0])},
+			[]string{r.failedMessageNewCode(r.section[0], r.val)},
 			nil,
 			nil,
 		).Print()
@@ -59,7 +62,7 @@ func (r *SectionIsAbsentRule) FailedMessage() []string {
 		if i != len(r.section)-1 {
 			codeBefore = append(codeBefore, fmt.Sprintf(`%s"%s": {`, tab, s))
 		} else {
-			newCode = []string{fmt.Sprintf(`%s%s`, tab, r.failedMessageNewCode(s))}
+			newCode = []string{fmt.Sprintf(`%s%s`, tab, r.failedMessageNewCode(s, r.val))}
 		}
 	}
 
@@ -71,12 +74,19 @@ func (r *SectionIsAbsentRule) FailedMessage() []string {
 	).Print()
 }
 
-func (r *SectionIsAbsentRule) failedMessageNewCode(section string) string {
-	switch r.val.(type) {
+func (r *SectionIsAbsentRule) failedMessageNewCode(section string, value any) string {
+	switch value.(type) {
 	case *string:
-		return fmt.Sprintf(`"%s": "%s",`, section, *r.val.(*string))
+		return fmt.Sprintf(`"%s": "%s",`, section, *value.(*string))
 	case *bool:
-		return fmt.Sprintf(`"%s": %t,`, section, *r.val.(*bool))
+		return fmt.Sprintf(`"%s": %t,`, section, *value.(*bool))
+	case *composerCustomType.BoolString:
+		v := *value.(*composerCustomType.BoolString)
+		if v.IsBool {
+			return r.failedMessageNewCode(section, &v.BoolVal)
+		}
+
+		return r.failedMessageNewCode(section, &v.StrVal)
 	default:
 		panic(fmt.Sprintf("type %T is not supported", r.val))
 	}
