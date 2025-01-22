@@ -26,6 +26,9 @@
   - https://github.com/dozer111/projectlinter-core/pull/25
 - **composer**: improve rule "section is absent"
   - https://github.com/dozer111/projectlinter-core/pull/25
+- **composer**: ⚠ refactor rule "dependencies constaints are valid"
+  - https://github.com/dozer111/projectlinter-core/pull/26
+
 
 ### parser
 
