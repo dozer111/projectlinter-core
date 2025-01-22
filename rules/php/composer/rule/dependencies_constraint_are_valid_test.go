@@ -1,83 +1,80 @@
 package rule_test
 
 import (
+	"regexp"
+	"testing"
+
 	"github.com/dozer111/projectlinter-core/rules/php/composer/config/composer_json"
 	"github.com/dozer111/projectlinter-core/rules/php/composer/rule"
-	"testing"
 
 	"github.com/Masterminds/semver/v3"
 	"github.com/stretchr/testify/assert"
 )
 
-func TestDependencyConstraintsAreValidSuccessCase(t *testing.T) {
-	cases := []struct {
-		desctiption string
-		value       string
-	}{
-		{
-			`d+`,
-			"8",
-		},
-		{
-			`d+.d+`,
-			"8.1",
-		},
-		{
-			`d+.d+.d+`,
-			"8.1.15",
-		},
-	}
-
-	for _, testCase := range cases {
-		t.Run(testCase.desctiption, func(t *testing.T) {
-			depsWithSymfonyConsole := composer_json.NewComposerDependencies()
-			depsWithSymfonyConsole.Add(composer_json.NewComposerDependency(
+func TestDependencyConstraintsAreValid(t *testing.T) {
+	t.Run("success", func(t *testing.T) {
+		depsWithSymfonyConsole := composer_json.NewComposerDependencies()
+		depsWithSymfonyConsole.Add(
+			composer_json.NewComposerDependency(
 				"symfony/console",
-				"^"+testCase.value,
-				semver.MustParse(testCase.value),
+				"^8.1",
+				semver.MustParse("8.1"),
 			),
-			)
-			r := rule.NewDependenciesConstrainsAreValidRule(depsWithSymfonyConsole, []string{})
-			r.Validate()
+		)
 
-			assert.True(t, r.IsPassed())
-		})
-	}
-}
+		r := rule.NewDependenciesConstrainsAreValidRule(
+			depsWithSymfonyConsole,
+			func(dependencyConstraint string) bool {
+				r1 := regexp.MustCompile(`^\^\d+$`)           // ^3
+				r2 := regexp.MustCompile(`^\^\d+\.\d+$`)      // ^3.2
+				r3 := regexp.MustCompile(`^\^\d+\.\d+\.\d+$`) // ^3.2.15
 
-func TestDependencyConstraintsAreValidFailCase(t *testing.T) {
-	depsWithWrongConstraint := composer_json.NewComposerDependencies()
-	depsWithWrongConstraint.Add(
-		composer_json.NewComposerDependency(
-			"symfony/console",
-			"dev-master",
-			nil,
-		),
-	)
+				return r1.MatchString(dependencyConstraint) ||
+					r2.MatchString(dependencyConstraint) ||
+					r3.MatchString(dependencyConstraint)
+			},
+			[]string{
+				`Dependency constraint(except "ext-") must match one of patterns: ^d+.d+(^8.1) or ^d+.d+.d+(^8.1.2)`,
+				"- ^d+$         ^8",
+				"- ^d+.d+$      ^8.1",
+				"- ^d+.d+.d+$   ^8.1.2",
+			},
+		)
+		r.Validate()
 
-	r := rule.NewDependenciesConstrainsAreValidRule(depsWithWrongConstraint, []string{})
-	r.Validate()
+		assert.True(t, r.IsPassed())
+	})
 
-	assert.False(t, r.IsPassed())
-}
+	t.Run("fail", func(t *testing.T) {
+		depsWithSymfonyConsole := composer_json.NewComposerDependencies()
+		depsWithSymfonyConsole.Add(
+			composer_json.NewComposerDependency(
+				"ext-mongo",
+				"*",
+				nil,
+			),
+		)
 
-func TestDependencyConstraintsAreValidIgnoreLibrariesInExceptionBlock(t *testing.T) {
-	depsWithWrongConstraint := composer_json.NewComposerDependencies()
-	depsWithWrongConstraint.Add(
-		composer_json.NewComposerDependency(
-			"symfony/console",
-			"dev-master",
-			nil,
-		),
-		composer_json.NewComposerDependency(
-			"ext-json",
-			"*",
-			nil,
-		),
-	)
+		r := rule.NewDependenciesConstrainsAreValidRule(
+			depsWithSymfonyConsole,
+			func(dependencyConstraint string) bool {
+				r1 := regexp.MustCompile(`^\^\d+$`)           // ^3
+				r2 := regexp.MustCompile(`^\^\d+\.\d+$`)      // ^3.2
+				r3 := regexp.MustCompile(`^\^\d+\.\d+\.\d+$`) // ^3.2.15
 
-	r := rule.NewDependenciesConstrainsAreValidRule(depsWithWrongConstraint, []string{"symfony/console", "ext-json"})
-	r.Validate()
+				return r1.MatchString(dependencyConstraint) ||
+					r2.MatchString(dependencyConstraint) ||
+					r3.MatchString(dependencyConstraint)
+			},
+			[]string{
+				`Dependency constraint(except "ext-") must match one of patterns: ^d+.d+(^8.1) or ^d+.d+.d+(^8.1.2)`,
+				"- ^d+$         ^8",
+				"- ^d+.d+$      ^8.1",
+				"- ^d+.d+.d+$   ^8.1.2",
+			},
+		)
+		r.Validate()
 
-	assert.True(t, r.IsPassed())
+		assert.False(t, r.IsPassed())
+	})
 }
