@@ -60,7 +60,7 @@ func (r *DependenciesConstrainsAreValidRule) FailedMessage() []string {
 	result = append(
 		result,
 		"",
-		"This library dependenies is wrong:",
+		"This library dependencies is wrong:",
 	)
 
 	for _, depWithWrongConstraint := range r.depsWithWrongConstraint.All() {
