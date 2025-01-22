@@ -10,7 +10,7 @@ import (
 
 type DependenciesConstrainsAreValidRule struct {
 	dependencies   *composer_json.ComposerDependencies
-	validationFunc func(string) bool
+	validationFunc func(dependency composer_json.ComposerDependency) bool
 
 	depsWithWrongConstraint     *composer_json.ComposerDependencies
 	additionalFailedMessageText []string
@@ -21,7 +21,7 @@ var _ rules.Rule = (*DependenciesConstrainsAreValidRule)(nil)
 
 func NewDependenciesConstrainsAreValidRule(
 	deps *composer_json.ComposerDependencies,
-	validationFunc func(string) bool,
+	validationFunc func(dependency composer_json.ComposerDependency) bool,
 	additionalFailedMessageText []string,
 ) *DependenciesConstrainsAreValidRule {
 	return &DependenciesConstrainsAreValidRule{
@@ -42,7 +42,7 @@ func (r *DependenciesConstrainsAreValidRule) Title() string {
 
 func (r *DependenciesConstrainsAreValidRule) Validate() {
 	for _, d := range r.dependencies.All() {
-		if !r.validationFunc(d.Constraint()) {
+		if !r.validationFunc(*d) {
 			r.depsWithWrongConstraint.Add(d)
 		}
 	}

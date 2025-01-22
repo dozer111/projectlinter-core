@@ -24,14 +24,14 @@ func TestDependencyConstraintsAreValid(t *testing.T) {
 
 		r := rule.NewDependenciesConstrainsAreValidRule(
 			depsWithSymfonyConsole,
-			func(dependencyConstraint string) bool {
+			func(dependency composer_json.ComposerDependency) bool {
 				r1 := regexp.MustCompile(`^\^\d+$`)           // ^3
 				r2 := regexp.MustCompile(`^\^\d+\.\d+$`)      // ^3.2
 				r3 := regexp.MustCompile(`^\^\d+\.\d+\.\d+$`) // ^3.2.15
 
-				return r1.MatchString(dependencyConstraint) ||
-					r2.MatchString(dependencyConstraint) ||
-					r3.MatchString(dependencyConstraint)
+				return r1.MatchString(dependency.Constraint()) ||
+					r2.MatchString(dependency.Constraint()) ||
+					r3.MatchString(dependency.Constraint())
 			},
 			[]string{
 				`Dependency constraint(except "ext-") must match one of patterns: ^d+.d+(^8.1) or ^d+.d+.d+(^8.1.2)`,
@@ -57,14 +57,14 @@ func TestDependencyConstraintsAreValid(t *testing.T) {
 
 		r := rule.NewDependenciesConstrainsAreValidRule(
 			depsWithSymfonyConsole,
-			func(dependencyConstraint string) bool {
+			func(dependency composer_json.ComposerDependency) bool {
 				r1 := regexp.MustCompile(`^\^\d+$`)           // ^3
 				r2 := regexp.MustCompile(`^\^\d+\.\d+$`)      // ^3.2
 				r3 := regexp.MustCompile(`^\^\d+\.\d+\.\d+$`) // ^3.2.15
 
-				return r1.MatchString(dependencyConstraint) ||
-					r2.MatchString(dependencyConstraint) ||
-					r3.MatchString(dependencyConstraint)
+				return r1.MatchString(dependency.Constraint()) ||
+					r2.MatchString(dependency.Constraint()) ||
+					r3.MatchString(dependency.Constraint())
 			},
 			[]string{
 				`Dependency constraint(except "ext-") must match one of patterns: ^d+.d+(^8.1) or ^d+.d+.d+(^8.1.2)`,
