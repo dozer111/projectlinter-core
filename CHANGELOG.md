@@ -21,6 +21,11 @@
 - **composer**: improve rule "section is correct": [issue](https://github.com/dozer111/projectlinter-core/issues/15)
   - https://github.com/dozer111/projectlinter-core/pull/16
   - https://github.com/dozer111/projectlinter-core/pull/17
+  - https://github.com/dozer111/projectlinter-core/pull/25
+- **composer**: improve rule "section exists"
+  - https://github.com/dozer111/projectlinter-core/pull/25
+- **composer**: improve rule "section is absent"
+  - https://github.com/dozer111/projectlinter-core/pull/25
 
 ### parser
 
