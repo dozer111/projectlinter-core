@@ -28,6 +28,7 @@
   - https://github.com/dozer111/projectlinter-core/pull/25
 - **composer**: ⚠ refactor rule "dependencies constaints are valid"
   - https://github.com/dozer111/projectlinter-core/pull/26
+  - https://github.com/dozer111/projectlinter-core/pull/27
 
 
 ### parser
